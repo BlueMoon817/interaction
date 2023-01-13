@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side Nav</title>
+    <style>
+        *{margin:0;padding:0;}
+        a{text-decoration:none;color:inherit;}
+        ul{list-style:none;}
+        .wrap{position:relative;}
+        .gnb{position:fixed;left:0;top:0;height:60px;width:100%;background-color:#000;color:#fff;}
+        section{display:flex;justify-content:center;align-items:center; height:100vh;width:100%;color:#000;font-size: 50px;font-weight:bold;text-transform: uppercase;}
+        .menu_bar{height:3px;background-color:#fff;transition: .3s;}
+        .gnb_nav{display:flex;width:100%;justify-content:space-between;box-sizing: border-box;padding:0 20%;}
+        .gnb_nav>li{line-height:60px;font-size:15px;font-weight:bold;text-transform: uppercase;}
+        .gnb_nav>li>a{display:block;padding:0 10px;height:100%;}
+        .area01{background-color:#fc0; }
+        .area02{background-color:#fa0; }
+        .area03{background-color:#faf; }
+        .area04{background-color:#0af; }
+        .area05{background-color:#0a0; }
+        .side_nav{position:fixed;left:50px;top:50%;transform: translateY(-50%);}
+        .lnb{width:3px;height:200px;background-color: #000;}
+        .list_nav{line-height:28px;}
+        .icon{position:absolute;left:0;width:3px;height:40px;background-color: #fff;transition: .3s;}
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="gnb">
+            <span class="menu_bar" style="position:absolute;bottom:0;"></span>
+            <ul class="gnb_nav">
+                <li class="menu01"><a href="#">menu01</a></li>
+                <li class="menu02"><a href="#">menu02</a></li>
+                <li class="menu03"><a href="#">menu03</a></li>
+                <li class="menu04"><a href="#">menu04</a></li>
+                <li class="menu04"><a href="#">menu05</a></li>
+            </ul>
+        </div>
+        <div class="side_nav">
+            <span class="icon" style="top:0px;"></span>
+            <ul class="lnb">
+                <li class="list_nav"></li>
+                <li class="list_nav"></li>
+                <li class="list_nav"></li>
+                <li class="list_nav"></li>
+                <li class="list_nav"></li>
+            </ul>
+        </div>
+        <section class="area01">section - 01</section>
+        <section class="area02">section - 02</section>
+        <section class="area03">section - 03</section>
+        <section class="area04">section - 04</section>
+        <section class="area05">section - 05</section>
+    </div>
+    <script>
+        const icon_mark=document.querySelector('.icon');
+        const wrap=document.querySelector('.wrap');
+        let bar = document.querySelector('.lnb');
+        let curr;
+        window.addEventListener('scroll', ()=>{
+            let wrapHeight=wrap.scrollHeight;  
+            let area01=0;
+            let area02=(wrapHeight/5)/1.5
+            let area03=((wrapHeight/5)*2)-((wrapHeight/5)/1.5)
+            let area04=((wrapHeight/5)*3)-((wrapHeight/5)/1.5)
+            let area05=((wrapHeight/5)*4)-((wrapHeight/5)/1.5)
+            curr=window.scrollY;
+            if(curr>=area05){
+                icon_mark.style.top='160px';
+            }else if(curr>=area04){
+                icon_mark.style.top='120px';
+            }else if(curr>=area03){
+                icon_mark.style.top='80px';
+            }else if(curr>=area02){
+                icon_mark.style.top='40px';
+            }else if(curr>=area01){
+                icon_mark.style.top='0px';
+            }
+        });
+        let menuBar=document.querySelector('.menu_bar');
+        const gnb=document.querySelector('.gnb_nav');
+        let list=gnb.querySelectorAll('a');
+        let barPos=list[0].offsetLeft;
+        menuBar.style.width=list[0].offsetWidth+'px';
+        menuBar.style.left=`${barPos}px`;
+        gnb.addEventListener('mouseover',(e)=>{
+            let item=e.target;
+            if(item.tagName=='A'){
+                barPos=item.offsetLeft;
+                menuBar.style.left=`${barPos}px`;
+            }
+        });
+    </script>
+</body>
+</html>
