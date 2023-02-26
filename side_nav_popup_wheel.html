@@ -43,8 +43,8 @@
         <div class="bg_area">
             <img src="img/change_01.jpg" alt="" class="bg" style="opacity:1;">
             <img src="img/change_02.jpg" alt="" class="bg" style="opacity:0;">
-            <img src="img/change_04.jpg" alt="" class="bg" style="opacity:0;">
             <img src="img/change_03.jpg" alt="" class="bg" style="opacity:0;">
+            <img src="img/change_04.jpg" alt="" class="bg" style="opacity:0;">
         </div>
         <button class="close">Close</button>
         <div class="pop_area">
@@ -133,13 +133,13 @@
                 }
             }
         });
+        // 모바일에서 touchmove and 아이폰은 gesturechange 로 처리해야함.
         window.addEventListener('mousewheel', (e)=>{
             e.preventDefault();
             let dir=e.deltaY > 0? "down" : "up";
             
             if(!stop){
                 stop=true;
-                
                 let delay=setTimeout(function(){
                     if(dir==="down"){
                         if(curr>=popHeight*3){  
