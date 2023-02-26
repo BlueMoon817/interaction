@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        body{width: 100%;height: 100vh;}
+        .wrap{display: flex;}
+        img{vertical-align: top;}
+        .img_box{position: relative; width: 300px;height: 450px;margin: 120px auto 0;overflow: hidden;}
+        /* 가로 중간 */
+        .img_box2::after{content:'';position: absolute;left: 0; top: 0; bottom: 0; right: 0; background-color: rgba(0,0,0, 0.6);clip-path:polygon(0% 50%,0% 50%,100% 50%,100% 50%); width: 100%;height: 100%;transition: .4s;}
+        /* 가로 벌어짐. */
+        .img_box5::before{content:'';position: absolute;z-index: 15; left: 0; bottom:50%;width: 100%;height: 50%; background-color: rgba(0,0,0, 0.6);clip-path:polygon(0% 0%,0% 0%,100% 0%,100% 0%);transition:.4s;}
+        .img_box5::after{content:'';position: absolute;left: 0; top: 50%; width: 100%;height: 50%; background-color: rgba(0,0,0, 0.6);clip-path:polygon(0% 100%,0% 100%,100% 100%,100% 100%);transition: .4s ;}
+        /* 대각선 효과 */
+        .img_box1::after{content:'';position: absolute;left: 0; top: 0; bottom: 0; right: 0; background-color: rgba(0,0,0, 0.6);clip-path:polygon(0% 100%,0% 100%,100% 0%,100% 0%); width: 100%;height: 100%;transition: .4s;}
+        .img_box3::after{content:'';position: absolute;left: 0; top: 0; bottom: 0; right: 0; background-color: rgba(0,0,0, 0.6);clip-path:polygon(50% 0%,40% 100%,100% 100%,100% 0%); width: 100%;height: 100%;transition: .4s;}
+        /* 세로 0으로 걷어내기 */
+        .img_box4::after{content:'';position: absolute;left: 0; top: 0; bottom: 0; right: 0; background-color: rgba(0,0,0, 0.6);clip-path:polygon(0% 0%,0% 100%,0% 100%,0% 0%); width: 100%;height: 100%;transition: .4s;}
+        .img_box img{height: 100%;object-fit: cover;transform: scale(1.2);transition: 0.5s;}
+        .img_box.is_active::before{clip-path:polygon(0 0,0 100%,100% 100%,100% 0);}
+        .img_box.is_active::after{clip-path:polygon(0 0,0 100%,100% 100%,100% 0);}
+        .img_box5.is_active::before{clip-path:polygon(0 0,0 100%,100% 100%,100% 0);transition: 0.1s;}
+        .img_box5.is_active::after{clip-path:polygon(0 0,0 100%,100% 100%,100% 0);transition: 0.1s;}
+        .img_box.is_active img{transform: scale(1);}
+        .line::after{content:''; position: absolute;left: 0;top: 50%;width: 0;height: 1px;background-color: #fff;z-index: 20;}
+        .img_box.is_active .line::after{transition: 0.6s;width: 100%;}
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="img_box img_box1 is_active">
+            <img src="img/img.jpg" alt="" class="num01">
+        </div>
+        <div class="img_box img_box2 is_active">
+            <img src="img/img.jpg" alt="" class="num02">
+        </div>
+        <div class="img_box img_box3 is_active">
+            <img src="img/img.jpg" alt="" class="num03">
+        </div>
+        <div class="img_box img_box4 is_active">
+            <img src="img/img.jpg" alt="" class="num04">
+        </div>
+        <div class="img_box img_box5 is_active">
+            <img src="img/img.jpg" alt="" class="num05">
+            <span class="line"></span>
+        </div>
+    </div>
+    <script>
+        let imgBoxArr=document.querySelectorAll('.img_box');
+        imgBoxArr.forEach(function(ev){
+            ev.addEventListener('mouseover',function(){
+                if(ev.classList.contains('is_active')){
+                    ev.classList.remove('is_active');
+                }
+            });
+            ev.addEventListener('mouseleave',function(){
+                if(!ev.classList.contains('is_active')){
+                    ev.classList.add('is_active');
+                }
+            });
+        });
+        
+
+
+    </script>
+</body>
+</html>

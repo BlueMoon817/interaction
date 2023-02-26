@@ -1,0 +1,39 @@
+* {margin: 0; padding: 0; box-sizing: border-box; text-decoration: none; font-family: 'Poppins', sans-serif;}
+body {display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #333; overflow: hidden;}
+.container {position: relative; padding: 80px 40px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 80px;}
+.card {position: relative; width: 350px; height: 180px; background: #333; transition: 0.5s;}
+.card:hover {height: 450px;}
+.lines {position: absolute; inset: 0; background: #000; overflow: hidden;}
+.lines::before {content: ''; position: absolute; left: 50%; top: 50%; width: 600px; height: 120px; background: linear-gradient(transparent, #45f3ff, #45f3ff, #45f3ff, transparent); animation: animate 4s linear infinite; animation-play-state: paused;}
+.card:hover .lines::before {animation-play-state: running;}
+.lines::after {content: ''; position: absolute; inset: 3px; background: #292929;}
+.imgBx {position: absolute; left: 50%; top: -60px; width: 150px; height: 150px; background: #000; transform: translateX(-50%); overflow: hidden; z-index: 10; display: flex; justify-content: center; align-items: center; transition: 0.5s;}
+.card:hover .imgBx {top: 25px; width: 200px; height: 200px;}
+.imgBx img {opacity: 0.5; position: absolute; width: 100px; z-index: 1; transition: 0.5s;}
+.card:hover .imgBx img {opacity: 1; width: 160px;}
+.imgBx::before {content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 500px; height: 150px; background: linear-gradient(transparent, #ff3c7b, #ff3c7b, #ff3c7b, transparent); animation: animate2 6s linear infinite; animation-play-state: paused;}
+.card:hover .imgBx::before {animation-play-state: running;}
+.imgBx::after {content: ''; position: absolute; inset: 3px; background: #292929;}
+.content {position: absolute; width: 100%; height: 100%; display: flex; justify-content: center; align-items: flex-end; overflow: hidden;}
+.details {width: 100%; transform: translateY(145px); padding: 30px 20px; text-align: center; transition: 0.5s;}
+.card:hover .details {transform: translateY(0px);}
+.details h2 {font-size: 1.5em; color: #45f3ff; font-weight: 500; line-height: 1.2em;}
+.details p {opacity: 0; color: #fff; overflow: hidden; text-overflow: ellipsis; word-wrap: break-word; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; transition: 0.5s;}
+.card:hover .details p {opacity: 1;}
+.details a {opacity: 0; display: inline-block; background: #45f3ff; color: #292929; font-weight: 500; padding: 8px 15px; margin-top: 10px; transition: 0.5s;}
+.card:hover .details a {opacity: 1;}
+
+@keyframes animate {
+    0% {transform: translate(-50%,-50%) rotate(0deg);}
+    100% {transform: translate(-50%,-50%) rotate(360deg);}
+}
+
+@keyframes animate2 {
+    0% {transform: translate(-50%,-50%) rotate(360deg);}
+    100% {transform: translate(-50%,-50%) rotate(0deg);}
+}
+
+@media (max-width: 440px) {
+    .container {padding: 40px; gap: 30px;}
+    .card {transform: scale(0.7);}
+}

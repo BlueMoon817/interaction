@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side Nav popup</title>
+    <style>
+        *{margin:0;padding:0;}
+        a{text-decoration:none;color:inherit;}
+        ul{list-style:none;}
+        body{width:100%;height:100vh;}
+        /* pop_area의 height 값에 따라 좌표 타점 수정해야함. 브라우저 높이가 resize 되는 것은 상관없음.*/
+        .pop_area{position:absolute;left:50%;top:50%;width:50%;height:24vh;transform: translate(-50%,-50%);overflow-y: hidden;}
+        .pop{width:100%;height:100%;overflow-y: scroll;}
+        section{display:flex;justify-content:center;align-items:center; height:24vh;width:100%;color:#000;font-size: 14px;font-weight:bold;text-transform: uppercase;box-sizing: border-box;padding:20px;}
+        .desc{display:block;}
+        .inner{position:relative;left:0;top:0;width:100%;height:auto;}
+        .area01{background-color:#fc0; }
+        .area02{background-color:#fa0; }
+        .area03{background-color:#faf; }
+        .area04{background-color:#0af; }
+        .area05{background-color:#0a0; }
+        .side_nav{position:fixed;left:50px;top:50%;transform: translateY(-50%);z-index:10;}
+        .lnb{display:block; width:3px;height:160px;background-color: #000;}
+        .icon{position:absolute;left:0;width:3px;height:40px;background-color: #fff;transition: .3s;}
+    </style>
+</head>
+<body> 
+    <div class="pop_area">
+    <div class="pop">
+        <div class="inner">
+        <div class="side_nav">
+            <span class="icon" style="top:0px;"></span>
+            <span class="lnb"></span>
+        </div>
+        <section class="area01">
+            <div class="txt_box">
+                <span class="desc">A grave without a name</span>
+                <span class="desc">Princess Ariah, who safely escaped from the castle,</span>
+                <span class="desc">made a grave to memorialize King Heinrich. </span>
+                <span class="desc">Yet, no one has been told what kind of grave it was.</span>
+                <span class="desc">Then, the royal family was brought to ruin and five houses began</span>
+                <span class="desc">to be up against one another.</span>
+            </div>
+    </section>
+        <section class="area02">
+            <div class="txt_box">
+                <span class="desc">A grave without a name</span>
+                <span class="desc">Princess Ariah, who safely escaped from the castle,</span>
+                <span class="desc">made a grave to memorialize King Heinrich. </span>
+                <span class="desc">Yet, no one has been told what kind of grave it was.</span>
+                <span class="desc">Then, the royal family was brought to ruin and five houses began</span>
+                <span class="desc">to be up against one another.</span>
+            </div>
+    </section>
+        <section class="area03">
+            <div class="txt_box">
+                <span class="desc">A grave without a name</span>
+                <span class="desc">Princess Ariah, who safely escaped from the castle,</span>
+                <span class="desc">made a grave to memorialize King Heinrich. </span>
+                <span class="desc">Yet, no one has been told what kind of grave it was.</span>
+                <span class="desc">Then, the royal family was brought to ruin and five houses began</span>
+                <span class="desc">to be up against one another.</span>
+            </div>
+</section>
+        <section class="area04">
+            <div class="txt_box">
+                <span class="desc">A grave without a name</span>
+                <span class="desc">Princess Ariah, who safely escaped from the castle,</span>
+                <span class="desc">made a grave to memorialize King Heinrich. </span>
+                <span class="desc">Yet, no one has been told what kind of grave it was.</span>
+                <span class="desc">Then, the royal family was brought to ruin and five houses began</span>
+                <span class="desc">to be up against one another.</span>
+            </div>
+        </section>
+        </div>
+    </div>
+    </div>
+    <script>
+        const icon_mark=document.querySelector('.icon');
+        const pop=document.querySelector('.pop');
+        const popArea=document.querySelector('.pop_area');
+        let curr;
+        const inner=document.querySelector('.inner');
+        let getScrollPosition= function () {
+            let y = pop.scrollTop;
+            return y;
+        }
+        pop.addEventListener('scroll', ()=>{
+            let popHeight=popArea.clientHeight;
+            console.log(popHeight)
+            curr=getScrollPosition();
+            let area01=0;
+            let area02=popHeight
+            let area03=popHeight*2;
+            let area04=popHeight*3;
+            if(curr>=area04){
+                icon_mark.style.top='120px';
+            }else if(curr>=area03){
+                icon_mark.style.top='80px';
+            }else if(curr>=area02){
+                icon_mark.style.top='40px';
+            }else if(curr>=area01){
+                icon_mark.style.top='0px';
+            }
+        });
+    </script>
+</body>
+</html>

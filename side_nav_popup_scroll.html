@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side Nav popup scroll</title>
+    <style>
+        *{margin:0;padding:0;}
+        a{text-decoration:none;color:inherit;}
+        ul{list-style:none;}
+        body{width:100%;height:100vh;transition: 1.2s;overflow: hidden;background-color:#ddd;}
+        .pop_dim{
+            position:absolute;width:100%;height:100%;left:0;top:0;display: none;
+        }
+        .bg_area{width:100%;height:100%;}
+        .bg{position:absolute;width:100%;height:100%;object-fit: cover;transition: .5s;}
+        .close{width:50px;height:50px;position:absolute;right:50px;top:50px;}
+        .pop_area{position:absolute;left:50%;top:70%;width:570px;height:256px;transform: translate(-50%,-50%);overflow: hidden;z-index:10;}
+        .pop{width:100%;height:100%;overflow-y:scroll;}
+        .inner{position:relative;left:0;top:0;width:100%;height:auto;}
+        section{display:-webkit-box; display:flex;justify-content:center;align-items:center;width:100%;height:256px;color:#000;font-size: 14px;font-weight:bold;text-transform: uppercase;box-sizing: border-box;padding:20px;}
+        .desc{display:block;}
+        .area01{background-color:#fc0; }
+        .area02{background-color:#fa0; }
+        .area03{background-color:#faf; }
+        .area04{background-color:#0af; }
+        .area05{background-color:#0a0; }
+        @media (max-width:1024px) {
+            .pop_area{height:190px;width:600px;}
+            section{height:190px;}
+        }
+        @media (max-width:720px)  {
+            .pop_area{height:160px;width:400px;}
+            section{height:160px;}
+        }
+    </style>
+</head>
+<body> 
+    <button class="open">open popup</button>
+    <div class="pop_dim" >
+        <div class="bg_area">
+            <img src="img/change_01.jpg" alt="" class="bg" style="opacity:1;">
+            <img src="img/change_02.jpg" alt="" class="bg" style="opacity:0;">
+            <img src="img/change_03.jpg" alt="" class="bg" style="opacity:0;">
+            <img src="img/change_04.jpg" alt="" class="bg" style="opacity:0;">
+        </div>
+        <button class="close">Close</button>
+        <div class="pop_area">
+            <div class="pop">
+                <div class="inner">
+                    <div class="side_nav">
+                        <span class="lnb"></span>
+                        <span class="icon" style="top:0px;"></span>
+                    </div>
+                    <section class="area01">
+                        <div class="txt_box">
+                            <span class="desc">A grave without a name</span>
+                            <span class="desc">Princess Ariah, who safely escaped from the castle,</span>
+                            <span class="desc">made a grave to memorialize King Heinrich. </span>
+                            <span class="desc">Yet, no one has been told what kind of grave it was.</span>
+                            <span class="desc">Then, the royal family was brought to ruin and five houses began</span>
+                            <span class="desc">to be up against one another.</span>
+                        </div>
+                    </section>
+                    <section class="area02">
+                        <div class="txt_box">
+                            <span class="desc">A grave without a name</span>
+                            <span class="desc">Princess Ariah, who safely escaped from the castle,</span>
+                            <span class="desc">made a grave to memorialize King Heinrich. </span>
+                            <span class="desc">Yet, no one has been told what kind of grave it was.</span>
+                            <span class="desc">Then, the royal family was brought to ruin and five houses began</span>
+                            <span class="desc">to be up against one another.</span>
+                        </div>
+                    </section>
+                    <section class="area03">
+                        <div class="txt_box">
+                            <span class="desc">A grave without a name</span>
+                            <span class="desc">Princess Ariah, who safely escaped from the castle,</span>
+                            <span class="desc">made a grave to memorialize King Heinrich. </span>
+                            <span class="desc">Yet, no one has been told what kind of grave it was.</span>
+                            <span class="desc">Then, the royal family was brought to ruin and five houses began</span>
+                            <span class="desc">to be up against one another.</span>
+                        </div>
+                    </section>
+                    <section class="area04">
+                        <div class="txt_box">
+                            <span class="desc">A grave without a name</span>
+                            <span class="desc">Princess Ariah, who safely escaped from the castle,</span>
+                            <span class="desc">made a grave to memorialize King Heinrich. </span>
+                            <span class="desc">Yet, no one has been told what kind of grave it was.</span>
+                            <span class="desc">Then, the royal family was brought to ruin and five houses began</span>
+                            <span class="desc">to be up against one another.</span>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const pop=document.querySelector('.pop');
+        const popArea=document.querySelector('.pop_area');
+        const popDim=document.querySelector('.pop_dim');
+        const bg=document.querySelectorAll('.bg');
+        const btnClose=document.querySelector('.close');
+        const btnOpen=document.querySelector('.open');
+        let popHeight;
+        let curr=0;
+        let stop=false;
+        let winWidth=window.outerWidth;
+        let resetFunc=function(){
+            bg[0].style.opacity='1';
+            curr=0;
+            popHeight=popArea.clientHeight;
+            pop.scrollTop=0;
+        }
+        function debounce (callback, wait){
+            let timeout;
+            return function(...args){
+                const context = this;
+                clearTimeout(timeout);
+                timeout = setTimeout(() => callback.apply(context, args), wait);
+            }
+        }
+        window.addEventListener('resize',debounce(() =>{ 
+            if(winWidth>window.outerWidth||winWidth<window.outerWidth){
+                winWidth=window.outerWidth;
+                resetFunc();
+                return popHeight;
+            }
+        },300));
+        
+        pop.addEventListener('scroll',function(){ 
+            if(!stop){
+                stop=true;
+                popHeight = popArea.clientHeight;
+                curr=pop.scrollTop;
+                for(let i=0;i<4;i+=1){
+                    bg[i].style.opacity='0';
+                }
+                if(curr>=popHeight*3-popHeight*0.8){
+                    bg[3].style.opacity='1';
+                }
+                else if(curr>=popHeight*2-popHeight*0.5){
+                    bg[2].style.opacity='1';
+                }else if(curr>=popHeight-popHeight*0.5){
+                    bg[1].style.opacity='1';
+                }else if(curr>=0){
+                    bg[0].style.opacity='1';
+                }
+                stop=false;
+            }
+        });
+       
+        btnClose.addEventListener('click',function(){
+            bg[0].style.opacity='1';
+            curr=0;
+            popDim.style.display="none";
+        });
+        btnOpen.addEventListener('click',function(){
+            popDim.style.display="block";
+            popHeight = popArea.clientHeight;
+        });
+    </script>
+</body>
+</html>
