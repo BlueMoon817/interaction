@@ -51,6 +51,9 @@
     let cursor=docHTML.querySelector('.custom_cursor');
     let tagA,tagButton,cursorY,winY,currPositionY;
     window.addEventListener('mousemove',function(e){
+      //브라우저 body의 left와 top에 닿으면 마우스가 사라지게 하기
+      if(e.pageX<=2 ||e.pageY<=1){  cursor.style.display='none'; return;}
+      else{ this.window.innerWidth>1024? cursor.style.display='block' : cursor.style.display='none';}
       tagA = e.target.closest('a');
       tagButton = e.target.closest('button');
         cursor.style.left=e.pageX+'px';
