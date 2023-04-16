@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>마우스 커스텀 커서(on/off ver.JS)</title>
+  <style>
+    html{cursor:none !important;}
+    *{margin:0;padding:0;}
+    a{display:block;text-decoration:none;width:200px;height:50px;background:#fc0;text-align:center;line-height:50px;cursor:none !important;}
+    button{cursor:none !important;display:block; text-decoration:none;width:200px;height:50px;background:#000;text-align:center;line-height:50px;color:#fff;}
+    button:disabled{cursor:none;pointer-events:none;}
+    body{overflow-x: hidden;}
+    section{width:100%;height:100vh;display:flex;justify-content:center;align-items:center;}
+    .wrap{min-width:300px;}
+    .custom_cursor{z-index:10;pointer-events: none;position:absolute;width:98px;height:98px;background-image: url(img/cursor_off.png);background-repeat:no-repeat;}
+    p{margin-top:20px;font-weight:bold;}
+    .s01{background-color:#ddd;}
+    .s02{background-color:#dff;}
+    .s03{background-color:#efe;}
+    
+  </style>
+</head>
+<body>
+    <span class="custom_cursor" aria-hidden="true" style="left:0;top:0;"></span>
+    <section class="s01">
+    <div class="wrap">
+      <a href="#"> A태그 </a>
+      <button>Button 태그</button>
+      <p> ** js로 마우스를 커스텀할 경우 고려해야 할 것들<br>
+        1. CSS에서 모든요소에 cursor:none 처리 해야함<br>
+        2. 커스텀한 태그로 클릭하려면 커스텀선택자에 css속성 pointer-events: none;추가해야함 <br>
+        3. hover 될 요소를 판별하여 커서를 바꿔줘야함<br>
+        4. 스크롤이 되면 마우스커서도 고정된 채로 따라 내려와야함<br>
+      </p>
+    </div>
+  </section>
+  <section class="s02">
+    <a href="#"> A태그 </a>
+    <button>Button 태그</button>
+  </section>
+  <section class="s03">
+    <a href="#"> A태그 </a>
+    <button>Button 태그</button>
+  </section>
+  
+  
+  <script>
+    let docHTML=document.querySelector('html');
+    let cursor=docHTML.querySelector('.custom_cursor');
+    let tagA,tagButton,cursorY,winY,currPositionY;
+    window.addEventListener('mousemove',function(e){
+      tagA = e.target.closest('a');
+      tagButton = e.target.closest('button');
+        cursor.style.left=e.pageX+'px';
+        cursorY=e.pageY;
+        cursor.style.top=cursorY+'px';
+      if(tagA || tagButton){
+        cursor.style.backgroundImage='url(img/cursor_on.png)';
+      }else{
+        cursor.style.backgroundImage='url(img/cursor_off.png)';
+      }
+      winY=window.scrollY;
+    }); 
+    let scrollWinY;
+    window.addEventListener('scroll',function(){
+      scrollWinY=this.scrollY;
+      currPositionY=cursorY+(scrollWinY-winY);
+      cursor.style.top=currPositionY+'px';
+    });
+  </script>
+  
+</body>
+</html>

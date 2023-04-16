@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>마우스 커서 커스텀 (on/off ver.CSS)</title>
+  <style>
+    html{cursor:url(img/cursor_off.png) , auto;}
+    *{margin:0;padding:0;}
+    a{display:block; text-decoration:none;width:200px;height:50px;background:#fc0;text-align:center;line-height:50px;cursor:url(img/cursor_on.png) , auto;}
+    button{cursor:url(img/cursor_on.png) , auto;display:block; text-decoration:none;width:200px;height:50px;background:#000;text-align:center;line-height:50px;color:#fff;}
+    section{width:100%;height:100vh;display:flex;justify-content:center;align-items:center;}
+    .wrap{width:300px;}
+    p{margin-top:20px;font-weight:bold;}
+    .s01{background-color:#ddd;}
+    .s02{background-color:#dff;}
+    .s03{background-color:#efe;}
+  </style>
+</head>
+<body>
+  <section class="s01">
+    <div class="wrap">
+      <a href="#"> A태그 </a>
+      <button>Button 태그</button>
+      <p>커서가 매우 클 경우 브라우저 창의 끝에 커서 이미지가 닿으면 기본커서로 바뀌어서 가장자리의 요소에 커스텀된 커서의 상태로 hover 할 수가 없음</p>
+    </div>
+  </section>
+  <section class="s02">
+    <a href="#"> A태그 </a>
+    <button>Button 태그</button>
+  </section>
+  <section class="s03">
+    <a href="#"> A태그 </a>
+    <button>Button 태그</button>
+  </section>
+</body>
+</html>
