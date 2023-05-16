@@ -6,70 +6,128 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>마우스 커스텀 커서(on/off ver.JS)</title>
   <style>
-    html{cursor:none !important;}
-    *{margin:0;padding:0;}
-    a{display:block;text-decoration:none;width:200px;height:50px;background:#fc0;text-align:center;line-height:50px;cursor:none !important;}
-    button{cursor:none !important;display:block; text-decoration:none;width:200px;height:50px;background:#000;text-align:center;line-height:50px;color:#fff;}
-    button:disabled{cursor:none;pointer-events:none;}
-    body{overflow-x: hidden;}
-    section{width:100%;height:100vh;display:flex;justify-content:center;align-items:center;}
-    .wrap{min-width:300px;}
-    .custom_cursor{z-index:10;pointer-events: none;position:absolute;width:98px;height:98px;background-image: url(img/cursor_off.png);background-repeat:no-repeat;}
-    p{margin-top:20px;font-weight:bold;}
-    .s01{background-color:#ddd;}
-    .s02{background-color:#dff;}
-    .s03{background-color:#efe;}
+    html{overflow-x: hidden;}
+    html,button,a{cursor: none;}
+    *{margin: 0;padding: 0;}
+    section{width: 100%;height: 100vh;display: flex;flex-direction: column;justify-content: center;align-items: center;}
+    .btn_group{display: flex;align-items: center; border: 3px solid #000; margin-top: 50px;padding: 10px;}
+    a{display:inline-block;margin-left: 10px; text-decoration: none;color: inherit;border: 2px solid #777;background-color: #ffd;color: #000;text-align: center;width: 200px;height: 50px;line-height: 50px;}
+    button{border: 2px solid #000;background-color: #fff;color: #999;text-align: center;width: 200px;height: 50px;box-sizing: unset;}
+    header{box-sizing: border-box;padding: 0 20px; display: flex;justify-content: space-between; height: 50px;width: 100%;background: #000;position: fixed;left: 0;top: 0;}
+    header ul{display: flex;list-style: none;}
+    header a{display: block;width:auto;height:100%;padding:5px 10px;background: #fff;box-sizing: border-box;line-height: 30px;border:0;}
+    header button{width: auto;height:100%;padding:5px 10px;background: #fff;box-sizing: border-box;line-height: 30px;border:0;}
+    .cursor{display: none;z-index: 10000;position: absolute;background-image: url(img/cursor_off.png);background-repeat: no-repeat; width: 98px;height: 98px;background-size: 100%;pointer-events:none;}
     
   </style>
 </head>
 <body>
-    <span class="custom_cursor" aria-hidden="true" style="left:0;top:0;"></span>
-    <section class="s01">
-    <div class="wrap">
-      <a href="#"> A태그 </a>
-      <button>Button 태그</button>
-      <p> ** js로 마우스를 커스텀할 경우 고려해야 할 것들<br>
-        1. CSS에서 모든요소에 cursor:none 처리 해야함<br>
-        2. 커스텀한 태그로 클릭하려면 커스텀선택자에 css속성 pointer-events: none;추가해야함 <br>
-        3. hover 될 요소를 판별하여 커서를 바꿔줘야함<br>
-        4. 스크롤이 되면 마우스커서도 고정된 채로 따라 내려와야함<br>
-      </p>
+  <div class="cursor" aria-hidden="true"></div>
+  <header>
+    <ul class="gnb">
+      <li><a href="#">메뉴1</a></li>
+      <li><a href="#">메뉴2</a></li>
+      <li><a href="#">메뉴3</a></li>
+    </ul>
+    <ul class="lang_box">
+      <li><button>en</button></li>
+      <li><button>ko</button></li>
+    </ul>
+  </header>
+  <section class="section01" style="background-color:#fc0">
+    <div class="content">
+    <div class="btn_group btn_group01">
+      <button><span>inner span tag</span></button>
+      <a href="#"><span>inner i tag</span></a>
+    </div>
+    <div class="btn_group btn_group02">
+      <button>only button</button>
+      <a href="#">only a</a>
+    </div>
+    <div class="btn_group btn_group03">
+        <div>
+          <button>outer div</button>
+        </div>
+        <div>
+          <a href="#">outer div</a>
+        </div>
+    </div>
+    <div class="btn_group btn_group04">
+      <div>
+        <button><span>inner span tag</span>& outer div</button>
+      </div>
+      <div>
+        <a href="#"><span>inner i tag</span>& outer div</a>
+      </div>
+    </div>
+     
     </div>
   </section>
-  <section class="s02">
-    <a href="#"> A태그 </a>
-    <button>Button 태그</button>
+  <section class="section02" style="background-color:#fdf">
+    <div class="content">
+    <div class="btn_group btn_group01">
+      <button><span>inner span tag</span></button>
+      <a href="#"><span>inner i tag</span></a>
+    </div>
+    <div class="btn_group btn_group02">
+      <button>only button</button>
+      <a href="#">only a</a>
+    </div>
+    <div class="btn_group btn_group03">
+        <div>
+          <button>outer div</button>
+        </div>
+        <div>
+          <a href="#">outer div</a>
+        </div>
+    </div>
+    <div class="btn_group btn_group04">
+      <div>
+        <button><span>inner span tag</span>& outer div</button>
+      </div>
+      <div>
+        <a href="#"><span>inner i tag</span>& outer div</a>
+      </div>
+    </div>
+    <div class="vd_area">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/n_uFzLPYDd8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    </div>
   </section>
-  <section class="s03">
-    <a href="#"> A태그 </a>
-    <button>Button 태그</button>
-  </section>
-  
+  <section></section>
   
   <script>
-    let docHTML=document.querySelector('html');
-    let cursor=docHTML.querySelector('.custom_cursor');
-    let tagA,tagButton,cursorY,winY,currPositionY;
-    window.addEventListener('mousemove',function(e){
-      //브라우저 body의 left와 top에 닿으면 마우스가 사라지게 하기
-      if(e.pageX<=2 ||e.pageY-win.scrollY<=1){  cursor.style.display='none'; return;}
-      else{ this.window.innerWidth>1024? cursor.style.display='block' : cursor.style.display='none';}
-      tagA = e.target.closest('a');
-      tagButton = e.target.closest('button');
-        cursor.style.left=e.pageX+'px';
-        cursorY=e.pageY;
-        cursor.style.top=cursorY+'px';
-      if(tagA || tagButton){
+    const cursor=document.querySelector('.cursor');
+    let vdArea=document.querySelector('.vd_area')
+    const html=document.querySelector('html');
+    const frm=document.querySelector('iframe');
+    let x=0,y=0,tagBtn,tagA,winY,scrollWinY,currPositionY;
+    html.addEventListener('mousemove',function(ev){
+      tagBtn=ev.target.closest('button');
+      tagA=ev.target.closest('a');
+      x=ev.pageX;
+      y=ev.pageY;
+      winY = window.scrollY;
+      if(ev.pageX<5 || ev.pageY-window.scrollY<5 || ev.pageY>html.offsetHeight-98){cursor.style.display='none'; return;}
+      if(frm){ // 이 문서에 vd_area가 있다면
+        //vd_area를 다시 파싱한다. (resize 대비하여 사이즈 값을 잡기 위함.)
+        vdArea=html.querySelector('.vd_area');
+        // 이 vd_area의 사이즈 보다 10이 작거나 클 때 브라우저 창에 마우스 커서가 닿기전에 보이지 않게 처리한다.
+      if((ev.pageX>=frm.offsetLeft-10 && ev.pageX<frm.offsetLeft+frm.clientWidth+10 && 
+          ev.pageY>=frm.offsetTop-10 && ev.pageY<frm.offsetTop+frm.clientHeight+98)){cursor.style.display='none'; return;}
+      }
+      window.innerWidth>1024? cursor.style.display='block' : cursor.style.display='none';
+      cursor.style.left=x+'px';
+      cursor.style.top=y+'px';
+      if(tagBtn || tagA){
         cursor.style.backgroundImage='url(img/cursor_on.png)';
       }else{
         cursor.style.backgroundImage='url(img/cursor_off.png)';
       }
-      winY=window.scrollY;
-    }); 
-    let scrollWinY;
+    });
     window.addEventListener('scroll',function(){
       scrollWinY=this.scrollY;
-      currPositionY=cursorY+(scrollWinY-winY);
+      currPositionY=y+(scrollWinY-winY);
       cursor.style.top=currPositionY+'px';
     });
   </script>
