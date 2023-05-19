@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Interaction Group</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,700');
+        html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,iframe,hr,h1,h2,h3,h4,h5,h6{margin:0;padding:0;font-family:'Noto Sans KR','맑은고딕','MalgunGothic',sans-serif}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}ul{list-style:none}button,input,select,textarea{margin:0}html{box-sizing:border-box}*{box-sizing:inherit}*:before,*:after{box-sizing:inherit}img,embed,object,audio,video{height:auto;max-width:100%}iframe{border:0}table{border-collapse:collapse;border-spacing:0}td,th{padding:0;text-align:left}
+        html,body{overflow:hidden;}
+        body{display: flex;justify-content: center;width: 100%;height: 100vh;;background: #f5f5f5;}
+        header{position:fixed;top:0;left:0;right:0;height:80px;background:#333;z-index:2;}
+        .clearfix:after,.clearfix:before{content:'';display:block;clear:both}
+        h1{margin:20px;font-size:26px;font-weight:bold;color:#eee;text-align: center;}
+        h2{padding:7px;font-size:18px;font-weight:bold;color:#333;border-bottom:2px solid #333}
+        .section_list{overflow:hidden;overflow-y:scroll;padding:20px;margin:80px 0 38px;min-width:500px;background-color: #fff;}
+        .section_list::-webkit-scrollbar{width: 10px;}
+        .section_list::-webkit-scrollbar-thumb{height: 30%; background: rgba(247, 194, 163, 0.5); border-radius: 15px;}
+        .section_list::-webkit-scrollbar-track{background: rgba(207, 92, 25, 0.1);}
+        ul{margin-bottom:20px}
+        li{display:block;padding:7px 10px;border-bottom:1px solid #eee}
+        li span{margin-left:10px}
+        a{font-size:13px;color:#777;text-decoration:none;letter-spacing:0.6px;padding:1px 5px;border-radius:3px}
+        a:hover{color:#333}
+        footer{position:fixed;left:0;right:0;bottom:0;padding:10px 20px;background:#333;text-align:center}
+        footer p{font-size:12px;color:#fff;letter-spacing:2px}
+        footer strong{text-transform:uppercase}
+        .new{display:inline-block;position:relative;top:-1px;height:16px;padding:0 5px 1px;border-radius:3px;background:#fd3939;font-family:verdana;font-size:11px;font-weight:normal;color:#fff;line-height:16px;vertical-align:middle}
+        .update{display:inline-block;position:relative;top:-1px;height:16px;background:#45a7fb;color:#fff;padding:0 5px 1px;border-radius:3px;font-family:verdana;font-size:11px;font-weight:normal;line-height:16px;vertical-align:middle}
+        .matching_keywords{background:rgb(42, 255, 156);color:rgb(22, 117, 46)}
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header class="clearfix">
+            <h1>INDEX : LayOut & Effect</h1>
+        </header>
+        
+        <section class="section_list">
+            <h2>Background</h2>
+            <ul>
+                <li><a href="views/appear_01.html">Rotate Background Effect #appear01</a><span class="new"></span></li>
+                <li><a href="views/appear_02.html">Rotate Background Effect #appear02</a><span class="new"></span></li>
+                <li><a href="views/disappear_01.html">Rotate Background Effect #disappear01</a><span class="new"></span></li>
+                <li><a href="">Snow_01</a> <span class="new">2023.02.06</span></li>
+                <li><a href="">FireballEffect</a> <span class="new">2023.02.10</span></li>
+            </ul>
+            <h2>Text</h2>
+            <ul>
+                <li><a href="">TypoInteraction(cursor)</a> <span class="new">2023.02.10</span></li>
+                <li><a href="">TypoInteraction</a> <span class="new">2023.02.13</span></li>
+                <li><a href=""></a> <span class="new">2023.02.13</span></li>
+            </ul>
+            <h2>Filter</h2>
+            <ul>
+                <li><a href="">BrightEffect</a> <span class="new">2023.02.06</span></li>
+            </ul>
+            <h2>HoverEffect</h2>
+            <ul>
+                <li><a href="">Slide Bar(가로 ver)</a> <span class="new"></span></li>
+                <li><a href="">Slide Bar(세로 ver)</a> <span class="new"></span></li>
+                <li><a href=""></a> <span class="new"></span></li>
+            </ul>
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="">Indicator</a> <span class="new"></span></li>
+                <li><a href=""></a> <span class="new"></span></li>
+                <li><a href=""></a> <span class="new"></span></li>
+            </ul>
+            <h2>Slider</h2>
+            <ul>
+                <li><a href="">Slide #1 - JS ver</a> <span class="new"></span></li>
+                <li><a href="">Slide #2 - swiper(2개 이상 연동)</a> <span class="new"></span></li>
+                <li><a href=""></a> <span class="new"></span></li>
+            </ul>
+            <h2>svg</h2>
+            <ul>
+                <li><a href=""></a> <span class="new"></span></li>
+            </ul>
+            <h2>canvas</h2>
+            <ul>
+                <li><a href=""></a> <span class="new"></span></li>
+            </ul>
+        
+        </section>
+        <footer>
+            <p><strong>YURA Moooon</strong></p>
+        </footer>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>
+    <script>
+    var headerHeight = $('header').outerHeight(),
+        footerHeight = $('footer').outerHeight(),
+        browserHeight = $(window).outerHeight(),
+        categoryList = ['All'],
+        categoryUnique = [],
+        categoryUnique2 = [],
+        sectionList = $('.section_list'),
+        categorySelect = $('#search_from_menu'),
+        dateLabel = sectionList.find('span'),
+        dateSelect = $('#search_from_date'),
+        dateList = ['Default'],
+        dateUnique = [],
+        searchKeyword = $('#search_by_keyword'),
+        searchValue = null;
+
+
+    var hiddenList = function() {
+        sectionList.find('h2').hide();
+        sectionList.find('ul').hide();
+        sectionList.find('li').hide();
+    }
+    var showList = function() {
+        sectionList.find('h2').show();
+        sectionList.find('ul').show();
+        sectionList.find('li').show();
+    }
+
+    var resetStyle = function() {
+        searchKeyword.val('');
+        sectionList.find('li a').removeClass('matching_keywords');
+    }
+
+    var setContentsHeight = function() {
+        sectionList.css({
+            height: browserHeight - (headerHeight + footerHeight)
+        });
+    }
+
+    var setDate = function() {
+        if (dateLabel.length > 0){
+            for (var k = 0; k < dateLabel.length; k++) {    
+                dateList.push(dateLabel.eq(k).text());
+                $.each(dateList, function(i, el){
+                    if($.inArray(el, dateUnique) === -1) dateUnique.push(el);
+                });
+            }
+
+            Array.prototype.move = function(from,to){
+                this.splice(to,0,this.splice(from,1)[0]);
+                return this;
+            };
+
+            dateUnique.sort();
+            dateUnique.move(dateUnique.lastIndexOf(),0);
+
+            for (var m = 0; m < dateUnique.length; m++) {
+                dateSelect.append( "<option value="+dateUnique[m]+">" + dateUnique[m] + "</option>" );  
+            }
+
+            dateSelect.on('change', function(){
+                var selectedValue = $(this).val();
+                if (selectedValue == 'Default') {
+                    showList();
+                } else {
+                    categorySelect.val('0').change();
+                    resetStyle();
+                    hiddenList();
+                    $.each($('.section_list span'), function (i, el) { 
+                        if ($(this).text() == selectedValue) {
+                            $(this).parents('ul').prev('h2').show();
+                            $(this).parents('ul').show();
+                            $(this).parents('li').show();
+                        }
+                    });
+                }
+            });
+        } else {
+            $('.search_date').hide();
+        }
+        
+    }
+
+    $(window).on('load', function(){
+        setContentsHeight();
+        setDate();
+    });
+    </script>
+</body>
+</html>

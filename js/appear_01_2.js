@@ -3,7 +3,7 @@ let img=document.querySelector('img');
 let btn=document.querySelector('.btn');
 let count=1;
 let ani=function(){
-    img.setAttribute('src',`img/${count}.png`);
+    img.setAttribute('src',`../img/${count}.png`);
     if(count>=34){
         let delay=setTimeout(function(){
             img.style.opacity='0';

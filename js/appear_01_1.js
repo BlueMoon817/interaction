@@ -10,11 +10,11 @@ let rotate = function(){
     let eff=setInterval(function(){
         if(count===0){
             count=40;
-            ani.setAttribute('src',`img/1.png`);
+            ani.setAttribute('src',`../img/1.png`);
             stay=false;
             clearInterval(eff);
         }else{
-            ani.setAttribute('src',`img/${count}.png`);
+            ani.setAttribute('src',`../img/${count}.png`);
             count-=1;
         }
     },2000/50);
