@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter Effect</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        body>div{position: relative; height: 100vh;width: 100%;display: flex; justify-content: center;align-items: center;background: #000;box-sizing: border-box; border-bottom: 2px solid #fc0;}
+        .img_wrap{position: relative; width: 501px;height: 321px;}
+        .img1{position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);}
+        .effect{ animation: bright 1s infinite alternate;}
+        .effect2{animation: blur 1s infinite alternate}
+         
+        .section3{background-image: url(../img/1.jpg);background-repeat: no-repeat; background-size: cover;overflow: hidden;}
+        .section4{background-image: url(../img/character.jpg);background-repeat: no-repeat; background-size: cover;overflow: hidden;}
+        .fireball{position: absolute;border-radius: 50%;filter:blur(2px);}
+        .fireball:nth-of-type(2n-1){animation: move2 10s infinite alternate;}
+        .fireball:nth-of-type(2n){animation: move3 10s infinite alternate;}
+        .fireball1{left: 70%;top: 40%; opacity: .7;width: 10px;height: 10px; background: #bb501f;}
+        .fireball2{left: 33%;top: 88%; opacity: .6;width: 13px;height: 13px; background: #ce6636;}
+        .fireball3{left: 77%;top: 52%; opacity: .8;width: 8px;height: 8px; background: #bb501f;}
+        .fireball4{left: 85%;top: 33%; opacity: .7;width: 10px;height: 10px;background: #bb501f;}
+        .fireball5{left: 45%;top: 55%; opacity: .6;width: 17px;height: 7px; background: #d14f38;}
+        .fireball6{left: 87%;top: 64%; opacity: .5;width: 10px;height: 5px; background: #ce6636;}
+        .fireball7{left: 74%;top: 60%; opacity: .7;width: 15px;height: 15px;background: #bb501f;}
+        .fireball8{left: 47%;top: 25%; opacity: .8;width: 8px;height: 10px;background: #ce6636;}
+        .fireball9{left: 18%;top: 34%; opacity: .5;width: 1px;height: 5px; background: #bb501f;}
+        .fireball10{left: 13%;top: 45%; opacity: .6;width: 10px;height: 10px; background: #b6402b;}
+        .fireball11{left: 78%;top: 66%; opacity: .7;width: 7px;height: 5px; background: #ce6636;}
+        .fireball12{left: 83%;top: 27%; opacity: .8;width: 8px;height: 8px; background: #b6402b;}
+        .fireball13{left: 93%;top: 25%; opacity: .6;width: 9px;height: 9px; background: #ce6636;}
+        .fireball14{left: 42%;top: 26%; opacity: .8;width: 11px;height: 11px; background: #b6402b;}
+        .fireball15{left: 96%;top: 21%; opacity: .7;width: 12px;height: 12px; background: #d14f38;}
+        .fireball13{left: 10%;top: 24%; opacity: .6;width: 10px;height: 10px; background: #ce6636;}
+        .fireball17{left: 80%;top: 98%; opacity: .6;width: 1px;height: 9px; background: #b6402b;}
+        .fireball18{left: 98%;top: 29%; opacity: .6;width: 10px;height: 10px; background: #ce6636;}
+        .fireball19{left: 17%;top: 32%; opacity: .7;width: 12px;height: 12px; background: #d14f38;}
+        .fireball20{left: 15%;top: 55%; opacity: .8;width: 5px;height: 17px; background: #b6402b;}
+        .fireball21{left: 66%;top: 64%; opacity: .7;width: 7px;height: 5px; background: #ce6636;}
+        .fireball22{left: 97%;top: 81%; opacity: .5;width: 8px;height: 8px; background: #b6402b;}
+        .fireball23{left: 81%;top: 54%; opacity: .6;width: 9px;height: 9px; background: #ce6636;}
+        .fireball24{left: 72%;top: 34%; opacity: .5;width: 11px;height: 11px; background: #b6402b;}
+        .fireball25{left: 45%;top: 77%; opacity: .7;width: 12px;height: 12px; background: #d14f38;}
+        .fireball26{left: 73%;top: 92%; opacity: .6;width: 10px;height: 10px; background: #ce6636;}
+        .fireball27{left: 19%;top: 75%; opacity: .6;width: 1px;height: 9px; background: #b6402b;}
+        .fireball28{left: 90%;top: 15%; opacity: .6;width: 10px;height: 10px; background: #ce6636;}
+        .fireball29{left: 0%;top: 64%; opacity: .7;width: 12px;height: 12px; background: #d14f38;}
+        .fireball30{left: 3%;top: 75%; opacity: .5;width: 5px;height: 17px; background: #b6402b;}
+        .ball{position: absolute;width: 8px;height: 8px;border-radius: 50%;background: #fff; }
+        .ball:nth-of-type(3n){animation: effect3 2s infinite alternate ,move2 7s infinite alternate;}
+        .ball:nth-of-type(7n){animation: effect3 3s infinite alternate ,move2 6s infinite alternate;}
+        .ball:nth-of-type(5n){animation: effect3 4s infinite alternate ,move2 10s infinite alternate;}
+        .ball:not(.ball:nth-of-type(3n),.ball:nth-of-type(7n),.ball:nth-of-type(5n)){animation: effect3 5s infinite alternate ,move3 14s infinite alternate;}
+        .ball1{left:99%;top: 76%;}
+        .ball2{left: 88%;top: 45%;}
+        .ball3{left: 86%;top: 24%;}
+        .ball4{left: 33%;top: 66%;}
+        .ball5{left: 64%;top: 36%;}
+        .ball6{left: 25%;top: 16%;}
+        .ball7{left: 75%;top: 80%;}
+        .ball8{left: 37%;top: 26%;}
+        .ball9{left: 24%;top: 54%;}
+        .ball10{left: 95%;top: 0%;}
+        .ball11{left: 87%;top: 73%;}
+        .ball12{left: 63%;top: 90%;}
+        .ball13{left: 92%;top: 8%;}
+        .ball14{left: 11%;top: 64%;}
+        .ball15{left: 94%;top: 70%;}
+        .ball16{left: 28%;top: 15%;}
+        .ball17{left: 74%;top: 37%;}
+        .ball18{left: 49%;top: 90%;}
+        .ball19{left: 51%;top: 48%;}
+        .ball20{left: 17%;top: 86%;}
+        /* .ball21{left: 35%;top: 1%;}
+        .ball22{left: 9%;top: 3%;}
+        .ball23{left: 1%;top: 90%;}
+        .ball24{left: 74%;top: 77%;}
+        .ball25{left: 99%;top: 61%;}
+        .ball26{left: 92%;top: 60%;}
+        .ball27{left: 93%;top: 29%;}
+        .ball28{left: 15%;top: 67%;}
+        .ball29{left: 44%;top: 37%;}
+        .ball30{left: 55%;top: 23%;}
+        .ball31{left: 31%;top: 51%;}
+        .ball32{left: 4%;top: 26%;}
+        .ball33{left: 7%;top: 18%;}
+        .ball34{left: 19%;top: 0%;}
+        .ball35{left: 26%;top: 46%;}
+        .ball36{left: 41%;top: 55%;}
+        .ball37{left: 98%;top: 11%;}
+        .ball38{left: 80%;top: 12%;}
+        .ball39{left: 66%;top: 13%;}
+        .ball40{left: 32%;top: 14%;} */
+        @keyframes bright{
+            0%{filter:brightness(1); -webkit-filter:brightness(1); }
+            50%{filter:brightness(2); -webkit-filter:brightness(1.5);}
+            100%{filter:brightness(3); -webkit-filter:brightness(2);}
+        }
+        @keyframes blur{
+            0%{filter:blur(2px); -webkit-filter:blur(2px); }
+            100%{filter:blur(0); -webkit-filter:blur(0);}
+        }
+        @keyframes effect3{
+            0%{filter:brightness(0.8) blur(2px); -webkit-filter:brightness(0.8) blur(2px);}
+            75%{filter:brightness(1) blur(2px); -webkit-filter:brightness(1) blur(2px);}
+            100%{filter:brightness(2) blur(2px); -webkit-filter:brightness(2) blur(2px);}
+        }
+        @keyframes effect4{
+            0%{filter:brightness(0.8) blur(2px); -webkit-filter:brightness(0.8) blur(2px);}
+            75%{filter:brightness(1) blur(2px); -webkit-filter:brightness(1) blur(2px);}
+            100%{filter:brightness(1.5) blur(2px); -webkit-filter:brightness(1.5) blur(2px);}
+        }
+        @keyframes move {
+            0%{transform: translateY(0%);-webkit-transform: translateY(0%);}
+            2%{transform: translateY(30%);-webkit-transform: translateY(30%);}
+            4%{transform: translateY(60%);-webkit-transform: translateY(60%);}
+            6%{transform: translateY(90%);-webkit-transform: translateY(90%);}
+            8%{transform: translateY(120%);-webkit-transform: translateY(120%);}
+            10%{transform: translateY(150%);-webkit-transform: translateY(150%);}
+            12%{transform: translateY(180%);-webkit-transform: translateY(180%);}
+            14%{transform: translateY(210%);-webkit-transform: translateY(210%);}
+            16%{transform: translateY(240%);-webkit-transform: translateY(240%);}
+            18%{transform: translateY(270%);-webkit-transform: translateY(270%);}
+            20%{transform: translateY(300%);-webkit-transform: translateY(300%);}
+            22%{transform: translateY(330%);-webkit-transform: translateY(330%);}
+            24%{transform: translateY(360%);-webkit-transform: translateY(360%);}
+            26%{transform: translateY(390%);-webkit-transform: translateY(390%);}
+            28%{transform: translateY(420%);-webkit-transform: translateY(420%);}
+            30%{transform: translateY(450%);-webkit-transform: translateY(450%);}
+            32%{transform: translateY(480%);-webkit-transform: translateY(480%);}
+            34%{transform: translateY(510%);-webkit-transform: translateY(510%);}
+            36%{transform: translateY(540%);-webkit-transform: translateY(540%);}
+            38%{transform: translateY(570%);-webkit-transform: translateY(570%);}
+            40%{transform: translateY(600%);-webkit-transform: translateY(600%);}
+            42%{transform: translateY(630%);-webkit-transform: translateY(630%);}
+            44%{transform: translateY(660%);-webkit-transform: translateY(660%);}
+            46%{transform: translateY(690%);-webkit-transform: translateY(690%);}
+            48%{transform: translateY(720%);-webkit-transform: translateY(720%);}
+            50%{transform: translateY(750%);-webkit-transform: translateY(750%);}
+            52%{transform: translateY(780%);-webkit-transform: translateY(780%);}
+            54%{transform: translateY(810%);-webkit-transform: translateY(810%);}
+            56%{transform: translateY(840%);-webkit-transform: translateY(840%);}
+            58%{transform: translateY(870%);-webkit-transform: translateY(870%);}
+            60%{transform: translateY(900%);-webkit-transform: translateY(900%);}
+            62%{transform: translateY(930%);-webkit-transform: translateY(930%);}
+            64%{transform: translateY(960%);-webkit-transform: translateY(960%);}
+            66%{transform: translateY(990%);-webkit-transform: translateY(990%);}
+            68%{transform: translateY(1020%);-webkit-transform: translateY(1020%);}
+            70%{transform: translateY(1050%);-webkit-transform: translateY(1050%);}
+            72%{transform: translateY(1080%);-webkit-transform: translateY(1080%);}
+            74%{transform: translateY(1110%);-webkit-transform: translateY(1110%);}
+            76%{transform: translateY(1140%);-webkit-transform: translateY(1140%);}
+            78%{transform: translateY(1170%);-webkit-transform: translateY(1170%);}
+            80%{transform: translateY(1200%);-webkit-transform: translateY(1200%);}
+            82%{transform: translateY(1230%);-webkit-transform: translateY(1230%);}
+            84%{transform: translateY(1260%);-webkit-transform: translateY(1260%);}
+            86%{transform: translateY(1290%);-webkit-transform: translateY(1290%);}
+            88%{transform: translateY(1320%);-webkit-transform: translateY(1320%);}
+            90%{transform: translateY(1350%);-webkit-transform: translateY(1350%);}
+            92%{transform: translateY(1380%);-webkit-transform: translateY(1380%);}
+            94%{transform: translateY(1410%);-webkit-transform: translateY(1410%);}
+            96%{transform: translateY(1440%);-webkit-transform: translateY(1440%);}
+            98%{transform: translateY(1470%);-webkit-transform: translateY(1470%);}
+            100%{transform: translateY(1500%);-webkit-transform: translateY(1500%);}
+        }
+        @keyframes move2{
+            0%{transform: translate(0%,0%);-webkit-transform: translate(0%,0%);}
+            2%{transform: translate(10%,30%);-webkit-transform: translate(10%,30%);}
+            4%{transform: translate(20%,20%);-webkit-transform: translate(20%,60%);}
+            6%{transform: translate(30%,90%);-webkit-transform: translate(30%,90%);}
+            8%{transform: translate(40%,120%);-webkit-transform: translate(40%,120%);}
+            10%{transform: translate(50%,150%);-webkit-transform: translate(50%,150%);}
+            12%{transform: translate(60%,180%);-webkit-transform: translate(60%,180%);}
+            14%{transform: translate(70%,210%);-webkit-transform: translate(70%,210%);}
+            16%{transform: translate(80%,240%);-webkit-transform: translate(80%,240%);}
+            18%{transform: translate(90%,270%);-webkit-transform: translate(90%,270%);}
+            20%{transform: translate(100%,300%);-webkit-transform: translate(100%,300%);}
+            22%{transform: translate(110%,330%);-webkit-transform: translate(110%,330%);}
+            24%{transform: translate(120%,360%);-webkit-transform: translate(120%,360%);}
+            26%{transform: translate(130%,390%);-webkit-transform: translate(130%,390%);}
+            28%{transform: translate(140%,420%);-webkit-transform: translate(140%,420%);}
+            30%{transform: translate(150%,450%);-webkit-transform: translate(150%,450%);}
+            32%{transform: translate(160%,480%);-webkit-transform: translate(160%,480%);}
+            34%{transform: translate(170%,510%);-webkit-transform: translate(170%,510%);}
+            36%{transform: translate(180%,540%);-webkit-transform: translate(180%,540%);}
+            38%{transform: translate(190%,570%);-webkit-transform: translate(190%,570%);}
+            40%{transform: translate(200%,600%);-webkit-transform: translate(200%,600%);}
+            42%{transform: translate(210%,630%);-webkit-transform: translate(210%,630%);}
+            44%{transform: translate(220%,660%);-webkit-transform: translate(220%,660%);}
+            46%{transform: translate(230%,690%);-webkit-transform: translate(230%,690%);}
+            48%{transform: translate(240%,720%);-webkit-transform: translate(240%,720%);}
+            50%{transform: translate(250%,750%);-webkit-transform: translate(250%,750%);}
+            52%{transform: translate(260%,780%);-webkit-transform: translate(260%,780%);}
+            54%{transform: translate(270%,810%);-webkit-transform: translate(270%,810%);}
+            56%{transform: translate(280%,840%);-webkit-transform: translate(280%,840%);}
+            58%{transform: translate(290%,870%);-webkit-transform: translate(290%,870%);}
+            60%{transform: translate(300%,900%);-webkit-transform: translate(300%,900%);}
+            62%{transform: translate(310%,930%);-webkit-transform: translate(310%,930%);}
+            64%{transform: translate(320%,960%);-webkit-transform: translate(320%,960%);}
+            66%{transform: translate(330%,990%);-webkit-transform: translate(330%,990%);}
+            68%{transform: translate(340%,1020%);-webkit-transform: translate(340%,1020%);}
+            70%{transform: translate(350%,1050%);-webkit-transform: translate(350%,1050%);}
+            72%{transform: translate(360%,1080%);-webkit-transform: translate(360%,1080%);}
+            74%{transform: translate(370%,1110%);-webkit-transform: translate(370%,1110%);}
+            76%{transform: translate(380%,1140%);-webkit-transform: translate(380%,1140%);}
+            78%{transform: translate(390%,1170%);-webkit-transform: translate(390%,1170%);}
+            80%{transform: translate(400%,1200%);-webkit-transform: translate(400%,1200%);}
+            82%{transform: translate(410%,1230%);-webkit-transform: translate(410%,1230%);}
+            84%{transform: translate(420%,1260%);-webkit-transform: translate(420%,1260%);}
+            86%{transform: translate(430%,1290%);-webkit-transform: translate(430%,1290%);}
+            88%{transform: translate(440%,1320%);-webkit-transform: translate(440%,1320%);}
+            90%{transform: translate(450%,1350%);-webkit-transform: translate(450%,1350%);}
+            92%{transform: translate(460%,1380%);-webkit-transform: translate(460%,1380%);}
+            94%{transform: translate(470%,1410%);-webkit-transform: translate(470%,1410%);}
+            96%{transform: translate(480%,1440%);-webkit-transform: translate(480%,1440%);}
+            98%{transform: translate(490%,1470%);-webkit-transform: translate(490%,1470%);}
+            100%{transform: translate(500%,1500%);-webkit-transform: translate(500%,1500%);}
+        }
+        @keyframes move3{
+            0%{transform: translate(0%,0%);-webkit-transform: translate(0%,0%);}
+            2%{transform: translate(-10%,30%);-webkit-transform: translate(-10%,30%);}
+            4%{transform: translate(-20%,20%);-webkit-transform: translate(-20%,60%);}
+            6%{transform: translate(-30%,90%);-webkit-transform: translate(-30%,90%);}
+            8%{transform: translate(-40%,120%);-webkit-transform: translate(-40%,120%);}
+            10%{transform: translate(-50%,150%);-webkit-transform: translate(-50%,150%);}
+            12%{transform: translate(-60%,180%);-webkit-transform: translate(-60%,180%);}
+            14%{transform: translate(-70%,210%);-webkit-transform: translate(-70%,210%);}
+            16%{transform: translate(-80%,240%);-webkit-transform: translate(-80%,240%);}
+            18%{transform: translate(-90%,270%);-webkit-transform: translate(-90%,270%);}
+            20%{transform: translate(-100%,300%);-webkit-transform: translate(-100%,300%);}
+            22%{transform: translate(-110%,330%);-webkit-transform: translate(-110%,330%);}
+            24%{transform: translate(-120%,360%);-webkit-transform: translate(-120%,360%);}
+            26%{transform: translate(-130%,390%);-webkit-transform: translate(-130%,390%);}
+            28%{transform: translate(-140%,420%);-webkit-transform: translate(-140%,420%);}
+            30%{transform: translate(-150%,450%);-webkit-transform: translate(-150%,450%);}
+            32%{transform: translate(-160%,480%);-webkit-transform: translate(-160%,480%);}
+            34%{transform: translate(-170%,510%);-webkit-transform: translate(-170%,510%);}
+            36%{transform: translate(-180%,540%);-webkit-transform: translate(-180%,540%);}
+            38%{transform: translate(-190%,570%);-webkit-transform: translate(-190%,570%);}
+            40%{transform: translate(-200%,600%);-webkit-transform: translate(-200%,600%);}
+            42%{transform: translate(-210%,630%);-webkit-transform: translate(-210%,630%);}
+            44%{transform: translate(-220%,660%);-webkit-transform: translate(-220%,660%);}
+            46%{transform: translate(-230%,690%);-webkit-transform: translate(-230%,690%);}
+            48%{transform: translate(-240%,720%);-webkit-transform: translate(-240%,720%);}
+            50%{transform: translate(-250%,750%);-webkit-transform: translate(-250%,750%);}
+            52%{transform: translate(-260%,780%);-webkit-transform: translate(-260%,780%);}
+            54%{transform: translate(-270%,810%);-webkit-transform: translate(-270%,810%);}
+            56%{transform: translate(-280%,840%);-webkit-transform: translate(-280%,840%);}
+            58%{transform: translate(-290%,870%);-webkit-transform: translate(-290%,870%);}
+            60%{transform: translate(-300%,900%);-webkit-transform: translate(-300%,900%);}
+            62%{transform: translate(-310%,930%);-webkit-transform: translate(-310%,930%);}
+            64%{transform: translate(-320%,960%);-webkit-transform: translate(-320%,960%);}
+            66%{transform: translate(-330%,990%);-webkit-transform: translate(-330%,990%);}
+            68%{transform: translate(-340%,1020%);-webkit-transform: translate(-340%,1020%);}
+            70%{transform: translate(-350%,1050%);-webkit-transform: translate(-350%,1050%);}
+            72%{transform: translate(-360%,1080%);-webkit-transform: translate(-360%,1080%);}
+            74%{transform: translate(-370%,1110%);-webkit-transform: translate(-370%,1110%);}
+            76%{transform: translate(-380%,1140%);-webkit-transform: translate(-380%,1140%);}
+            78%{transform: translate(-390%,1170%);-webkit-transform: translate(-390%,1170%);}
+            80%{transform: translate(-400%,1200%);-webkit-transform: translate(-400%,1200%);}
+            82%{transform: translate(-410%,1230%);-webkit-transform: translate(-410%,1230%);}
+            84%{transform: translate(-420%,1260%);-webkit-transform: translate(-420%,1260%);}
+            86%{transform: translate(-430%,1290%);-webkit-transform: translate(-430%,1290%);}
+            88%{transform: translate(-440%,1320%);-webkit-transform: translate(-440%,1320%);}
+            90%{transform: translate(-450%,1350%);-webkit-transform: translate(-450%,1350%);}
+            92%{transform: translate(-460%,1380%);-webkit-transform: translate(-460%,1380%);}
+            94%{transform: translate(-470%,1410%);-webkit-transform: translate(-470%,1410%);}
+            96%{transform: translate(-480%,1440%);-webkit-transform: translate(-480%,1440%);}
+            98%{transform: translate(-490%,1470%);-webkit-transform: translate(-490%,1470%);}
+            100%{transform: translate(-500%,1500%);-webkit-transform: translate(-500%,1500%);}
+        }
+    </style>
+</head>
+<body>
+    <div class="section01">
+        <div class="img_wrap">
+            <img class="cou img1" src="../img/coupon.png" alt="">
+            <img class="effect img1" src="../img/download.png" alt="">
+        </div>
+    </div>
+    <!-- <div class="section02">
+        <div class="img_wrap2">
+            <img class="effect2" src="img/test1.png" alt="">
+        </div>
+    </div>
+    <div class="section02">
+        <div class="img_wrap2">
+            <img class="effect" src="img/test1.png" alt="">
+        </div>
+    </div> -->
+    <div class="section3">
+        <span class="ball1 ball"></span>
+        <span class="ball2 ball"></span>
+        <span class="ball3 ball"></span>
+        <span class="ball4 ball"></span>
+        <span class="ball5 ball"></span>
+        <span class="ball6 ball"></span>
+        <span class="ball7 ball"></span>
+        <span class="ball8 ball"></span>
+        <span class="ball9 ball"></span>
+        <span class="ball10 ball"></span>
+        <span class="ball11 ball"></span>
+        <span class="ball12 ball"></span>
+        <span class="ball13 ball"></span>
+        <span class="ball14 ball"></span>
+        <span class="ball15 ball"></span>
+        <span class="ball16 ball"></span>
+        <span class="ball17 ball"></span>
+        <span class="ball18 ball"></span>
+        <span class="ball19 ball"></span>
+        <span class="ball20 ball"></span>
+        <!-- <span class="ball21 ball"></span>
+        <span class="ball22 ball"></span>
+        <span class="ball23 ball"></span>
+        <span class="ball24 ball"></span>
+        <span class="ball25 ball"></span>
+        <span class="ball26 ball"></span>
+        <span class="ball27 ball"></span>
+        <span class="ball28 ball"></span>
+        <span class="ball29 ball"></span>
+        <span class="ball30 ball"></span>
+        <span class="ball31 ball"></span>
+        <span class="ball32 ball"></span>
+        <span class="ball33 ball"></span>
+        <span class="ball34 ball"></span>
+        <span class="ball35 ball"></span>
+        <span class="ball36 ball"></span>
+        <span class="ball37 ball"></span>
+        <span class="ball38 ball"></span>
+        <span class="ball39 ball"></span>
+        <span class="ball40 ball"></span> -->
+    </div>
+    <div class="section4">
+        <span class="fireball fireball1"></span>
+        <span class="fireball fireball2"></span>
+        <span class="fireball fireball3"></span>
+        <span class="fireball fireball4"></span>
+        <span class="fireball fireball5"></span>
+        <span class="fireball fireball6"></span>
+        <span class="fireball fireball7"></span>
+        <span class="fireball fireball8"></span>
+        <span class="fireball fireball9"></span>
+        <span class="fireball fireball10"></span>
+        <span class="fireball fireball11"></span>
+        <span class="fireball fireball12"></span>
+        <span class="fireball fireball13"></span>
+        <span class="fireball fireball14"></span>
+        <span class="fireball fireball15"></span>
+        <span class="fireball fireball16"></span>
+        <span class="fireball fireball17"></span>
+        <span class="fireball fireball18"></span>
+        <span class="fireball fireball19"></span>
+        <span class="fireball fireball20"></span>
+        <span class="fireball fireball21"></span>
+        <span class="fireball fireball22"></span>
+        <span class="fireball fireball23"></span>
+        <span class="fireball fireball24"></span>
+        <span class="fireball fireball25"></span>
+        <span class="fireball fireball26"></span>
+        <span class="fireball fireball27"></span>
+        <span class="fireball fireball28"></span>
+        <span class="fireball fireball29"></span>
+        <span class="fireball fireball30"></span>
+    </div>
+</body>
+</html>
