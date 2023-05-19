@@ -16,11 +16,11 @@
         .gnb_nav{display:flex;width:100%;justify-content:space-between;box-sizing: border-box;padding:0 20%;}
         .gnb_nav>li{line-height:60px;font-size:15px;font-weight:bold;text-transform: uppercase;}
         .gnb_nav>li>a{display:block;padding:0 10px;height:100%;}
-        .area01{background-color:#fc0; }
-        .area02{background-color:#fa0; }
-        .area03{background-color:#faf; }
-        .area04{background-color:#0af; }
-        .area05{background-color:#0a0; }
+        .sec01{background-color:#fc0;}
+        .sec02{background-color:#fa0;}
+        .sec03{background-color:#faf;}
+        .sec04{background-color:#0af;}
+        .sec05{background-color:#0a0;}
         .side_nav{position:fixed;left:50px;top:50%;transform: translateY(-50%);}
         .lnb{display:inline-block;width:3px;height:200px;background-color: #000;}
         .icon{position:absolute;left:0;width:3px;height:40px;background-color: #fff;transition: .3s;}
@@ -42,50 +42,69 @@
             <span class="icon" style="top:0px;"></span>
             <span class="lnb"></span>
         </div>
-        <section class="area01">section - 01</section>
-        <section class="area02">section - 02</section>
-        <section class="area03">section - 03</section>
-        <section class="area04">section - 04</section>
-        <section class="area05">section - 05</section>
+        <section class="sec01">section - 01</section>
+        <section class="sec02">section - 02</section>
+        <section class="sec03">section - 03</section>
+        <section class="sec04">section - 04</section>
+        <section class="sec05">section - 05</section>
     </div>
     <script>
-        const icon_mark=document.querySelector('.icon');
         const wrap=document.querySelector('.wrap');
+        let sectionArr =document.querySelectorAll('section');
+        const icon_mark=document.querySelector('.icon');
         let bar = document.querySelector('.lnb');
         let curr;
-        window.addEventListener('scroll', ()=>{
-            let wrapHeight=wrap.scrollHeight;  
-            let area01=0;
-            let area02=(wrapHeight/5)*1.3-((wrapHeight/5)/1.5)
-            let area03=((wrapHeight/5)*2.2)-((wrapHeight/5)/1.5)
-            let area04=((wrapHeight/5)*3)-((wrapHeight/5)/1.5)
-            let area05=((wrapHeight/5)*3.9)-((wrapHeight/5)/1.5)
-            curr=window.scrollY;
-            console.log(curr)
-            if(curr>=area05){
-                icon_mark.style.top='160px';
-            }else if(curr>=area04){
-                icon_mark.style.top='120px';
-            }else if(curr>=area03){
-                icon_mark.style.top='80px';
-            }else if(curr>=area02){
-                icon_mark.style.top='40px';
-            }else if(curr>=area01){
-                icon_mark.style.top='0px';
-            }
-        });
+        let sec01=document.querySelector('.sec01').offsetTop - window.innerHeight/2;
+        let sec02=document.querySelector('.sec02').offsetTop - window.innerHeight/2;
+        let sec03=document.querySelector('.sec03').offsetTop - window.innerHeight/2;
+        let sec04=document.querySelector('.sec04').offsetTop - window.innerHeight/2;
+        let sec05=document.querySelector('.sec05').offsetTop - window.innerHeight/2;
         let menuBar=document.querySelector('.menu_bar');
         const gnb=document.querySelector('.gnb_nav');
         let list=gnb.querySelectorAll('a');
         let barPos=list[0].offsetLeft;
         menuBar.style.width=list[0].offsetWidth+'px';
         menuBar.style.left=`${barPos}px`;
+        window.addEventListener('resize',function(){
+          sec01=document.querySelector('.sec01').offsetTop - window.innerHeight/2;
+          sec02=document.querySelector('.sec02').offsetTop - window.innerHeight/2;
+          sec03=document.querySelector('.sec03').offsetTop - window.innerHeight/2;
+          sec04=document.querySelector('.sec04').offsetTop - window.innerHeight/2;
+          sec05=document.querySelector('.sec05').offsetTop - window.innerHeight/2;
+          posConfirm();
+        });
+        let posConfirm=function(){
+          let wrapHeight=wrap.scrollHeight;  
+          curr=window.scrollY;
+          if(curr>=sec05){
+              icon_mark.style.top='160px';
+              menuBar.style.left=list[4].offsetLeft+'px';
+          }else if(curr>=sec04){
+              icon_mark.style.top='120px';
+              menuBar.style.left=list[3].offsetLeft+'px';
+          }else if(curr>=sec03){
+              icon_mark.style.top='80px';
+              menuBar.style.left=list[2].offsetLeft+'px';
+          }else if(curr>=sec02){
+              icon_mark.style.top='40px';
+              menuBar.style.left=list[1].offsetLeft+'px';
+          }else if(curr>=sec01){
+              icon_mark.style.top='0px';
+              menuBar.style.left=list[0].offsetLeft+'px';
+          }
+        }
+        window.addEventListener('scroll', ()=>{
+          posConfirm();
+        });
         gnb.addEventListener('mouseover',(e)=>{
             let item=e.target;
             if(item.tagName=='A'){
                 barPos=item.offsetLeft;
                 menuBar.style.left=`${barPos}px`;
             }
+        });
+        gnb.addEventListener('mouseleave',(e)=>{
+          posConfirm();
         });
     </script>
 </body>
