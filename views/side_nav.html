@@ -53,11 +53,6 @@
         let sectionArr =document.querySelectorAll('section');
         const icon_mark=document.querySelector('.icon');
         let bar = document.querySelector('.lnb');
-        // let sec01=document.querySelector('.sec01').offsetTop - window.innerHeight/2;
-        // let sec02=document.querySelector('.sec02').offsetTop - window.innerHeight/2;
-        // let sec03=document.querySelector('.sec03').offsetTop - window.innerHeight/2;
-        // let sec04=document.querySelector('.sec04').offsetTop - window.innerHeight/2;
-        // let sec05=document.querySelector('.sec05').offsetTop - window.innerHeight/2;
         let menuBar=document.querySelector('.menu_bar');
         const gnb=document.querySelector('.gnb_nav');
         let list=gnb.querySelectorAll('a');
@@ -69,15 +64,15 @@
           posConfirm();
         });
         let posConfirm=function(){
-        //   let wrapHeight=wrap.scrollHeight;  
-          currPos=window.scrollY;
-        for(let i=0; i<sectionArr.length; i+=1){
-          if(currPos > sectionArr[i].offsetTop - window.innerHeight/2 && 
-            currPos < sectionArr[i].offsetTop - window.innerHeight/2 + sectionArr[i].offsetHeight){
-              icon_mark.style.top=i*40 + 'px';
-              menuBar.style.left=list[i-1].offsetLeft+'px';
-          }
-        }
+            currPos=window.scrollY;
+            for(let i=0; i<sectionArr.length; i+=1){
+                if(currPos > sectionArr[i].offsetTop - window.innerHeight/2 && 
+                currPos < sectionArr[i].offsetTop - window.innerHeight/2 + sectionArr[i].offsetHeight){
+                    icon_mark.style.top=i*40 + 'px';
+                    menuBar.style.left=list[i-1].offsetLeft+'px';
+                    break;
+                }
+            }
         }
         window.addEventListener('scroll', ()=>{
           posConfirm();
