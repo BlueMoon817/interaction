@@ -53,45 +53,31 @@
         let sectionArr =document.querySelectorAll('section');
         const icon_mark=document.querySelector('.icon');
         let bar = document.querySelector('.lnb');
-        let curr;
-        let sec01=document.querySelector('.sec01').offsetTop - window.innerHeight/2;
-        let sec02=document.querySelector('.sec02').offsetTop - window.innerHeight/2;
-        let sec03=document.querySelector('.sec03').offsetTop - window.innerHeight/2;
-        let sec04=document.querySelector('.sec04').offsetTop - window.innerHeight/2;
-        let sec05=document.querySelector('.sec05').offsetTop - window.innerHeight/2;
+        // let sec01=document.querySelector('.sec01').offsetTop - window.innerHeight/2;
+        // let sec02=document.querySelector('.sec02').offsetTop - window.innerHeight/2;
+        // let sec03=document.querySelector('.sec03').offsetTop - window.innerHeight/2;
+        // let sec04=document.querySelector('.sec04').offsetTop - window.innerHeight/2;
+        // let sec05=document.querySelector('.sec05').offsetTop - window.innerHeight/2;
         let menuBar=document.querySelector('.menu_bar');
         const gnb=document.querySelector('.gnb_nav');
         let list=gnb.querySelectorAll('a');
         let barPos=list[0].offsetLeft;
         menuBar.style.width=list[0].offsetWidth+'px';
         menuBar.style.left=`${barPos}px`;
+        let currPos;
         window.addEventListener('resize',function(){
-          sec01=document.querySelector('.sec01').offsetTop - window.innerHeight/2;
-          sec02=document.querySelector('.sec02').offsetTop - window.innerHeight/2;
-          sec03=document.querySelector('.sec03').offsetTop - window.innerHeight/2;
-          sec04=document.querySelector('.sec04').offsetTop - window.innerHeight/2;
-          sec05=document.querySelector('.sec05').offsetTop - window.innerHeight/2;
           posConfirm();
         });
         let posConfirm=function(){
-          let wrapHeight=wrap.scrollHeight;  
-          curr=window.scrollY;
-          if(curr>=sec05){
-              icon_mark.style.top='160px';
-              menuBar.style.left=list[4].offsetLeft+'px';
-          }else if(curr>=sec04){
-              icon_mark.style.top='120px';
-              menuBar.style.left=list[3].offsetLeft+'px';
-          }else if(curr>=sec03){
-              icon_mark.style.top='80px';
-              menuBar.style.left=list[2].offsetLeft+'px';
-          }else if(curr>=sec02){
-              icon_mark.style.top='40px';
-              menuBar.style.left=list[1].offsetLeft+'px';
-          }else if(curr>=sec01){
-              icon_mark.style.top='0px';
-              menuBar.style.left=list[0].offsetLeft+'px';
+        //   let wrapHeight=wrap.scrollHeight;  
+          currPos=window.scrollY;
+        for(let i=0; i<sectionArr.length; i+=1){
+          if(currPos > sectionArr[i].offsetTop - window.innerHeight/2 && 
+            currPos < sectionArr[i].offsetTop - window.innerHeight/2 + sectionArr[i].offsetHeight){
+              icon_mark.style.top=i*40 + 'px';
+              menuBar.style.left=list[i-1].offsetLeft+'px';
           }
+        }
         }
         window.addEventListener('scroll', ()=>{
           posConfirm();
