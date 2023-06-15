@@ -14,8 +14,11 @@
         section{display:flex;justify-content:center;align-items:center; height:100vh;width:100%;color:#000;font-size: 50px;font-weight:bold;text-transform: uppercase;}
         .menu_bar{height:3px;background-color:#fff;transition: .3s;}
         .gnb_nav{display:flex;width:100%;justify-content:space-between;box-sizing: border-box;padding:0 20%;}
-        .gnb_nav>li{line-height:60px;font-size:15px;font-weight:bold;text-transform: uppercase;}
-        .gnb_nav>li>a{display:block;padding:0 10px;height:100%;}
+        .gnb_nav>li{position: relative;line-height:60px;height: 60px;font-size:15px;font-weight:bold;text-transform: uppercase;}
+        .gnb_nav>li>a{display: block; padding:0 10px;height:60px;transition: 0.3s;}
+        .gnb_nav>li>a::after{content:''; width: 0;height: 3px;background-color: #fff;position: absolute;left: 50%;bottom: 0;transform: translateX(-50%);}
+        .gnb_nav>li>a:hover{color: #ddd;}
+        .gnb_nav>li>a:hover::after{width: 90%;transition: 0.3s;}
         .sec01{background-color:#fc0;}
         .sec02{background-color:#fa0;}
         .sec03{background-color:#faf;}
@@ -53,13 +56,10 @@
         const gnb = document.querySelector('.gnb_nav');
         let sectionArr = document.querySelectorAll('section');
         let menuBar = document.querySelector('.menu_bar');
-        let list = gnb.querySelectorAll('a');
-        let barPos = list[0].offsetLeft;
-        let currPos;
+        let list = gnb.querySelectorAll('li');
+        let barPos , currPos,currBarPos;
         menuBar.style.width=list[0].offsetWidth+'px';
-        menuBar.style.left=`${barPos}px`;
-        icon_mark.style.top = 0;
-        let moveNav=function(idx){
+        let changeNav=function(idx){
           icon_mark.style.top = (idx*40) + 'px';
           barPos = list[idx].offsetLeft;
           menuBar.style.left=`${barPos}px`;
@@ -68,7 +68,7 @@
           currPos = window.scrollY;
           for(let i=sectionArr.length-1; i>=0; i-=1){
             if(currPos > sectionArr[i].offsetTop - window.innerHeight/2){
-              moveNav(i);
+              changeNav(i);
               break;
             }
           } 
@@ -79,23 +79,19 @@
         window.addEventListener('scroll', ()=>{
           posParsing();
         });
-        list.forEach((item,idx)=>{
-          item.addEventListener('mouseover',(e)=>{
-            if(e.target.tagName=='A'){
-              menuBar.style.left=list[idx].offsetLeft+'px';
-            }
+        gnb.addEventListener('click',function(e){
+          //메뉴와 영역이 일치하는 인덱스 구하기.
+          let currIndex=parseInt(e.target.innerHTML[5])-1;
+          barPos = e.target.offsetLeft;
+          e.target.style.left=`${barPos}px`;
+          window.scroll({
+            top: sectionArr[currIndex].offsetTop,
+            behavior:"smooth",
           });
-          item.addEventListener('mouseleave',()=>{
-            menuBar.style.left=`${barPos}px`;
           });
-          item.addEventListener('click',function(){
-            window.scroll({
-              top:sectionArr[idx].offsetTop,
-              behavior:"smooth"
-            });
-            moveNav(idx);
+          window.addEventListener('load',function(){
+            changeNav(0);
           });
-        });
     </script>
 </body>
 </html>
