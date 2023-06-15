@@ -49,51 +49,35 @@
         <section class="sec05">section - 05</section>
     </div>
     <script>
-        const wrap = document.querySelector('.wrap');
         const icon_mark = document.querySelector('.icon');
         const gnb = document.querySelector('.gnb_nav');
         let sectionArr = document.querySelectorAll('section');
-        let bar = document.querySelector('.lnb');
         let menuBar = document.querySelector('.menu_bar');
         let list = gnb.querySelectorAll('a');
         let barPos = list[0].offsetLeft;
-        let currPos,currAreaNum;
+        let currPos;
         menuBar.style.width=list[0].offsetWidth+'px';
-        let posConfirm = function(){
+        menuBar.style.left=`${barPos}px`;
+        icon_mark.style.top = 0;
+        let moveNav=function(idx){
+          icon_mark.style.top = (idx*40) + 'px';
+          barPos = list[idx].offsetLeft;
+          menuBar.style.left=`${barPos}px`;
+        }
+        let posParsing = function(){
           currPos = window.scrollY;
-          if(currAreaNum){icon_mark.style.top = currAreaNum*40 + 'px';
-            menuBar.style.left = list[currAreaNum].offsetLeft+'px';}
-            else{
-              for(let i=sectionArr.length-1; i>=0; i-=1){
-                if(currPos > sectionArr[i].offsetTop - window.innerHeight/2){
-                  icon_mark.style.top = i*40 + 'px';
-                  menuBar.style.left = list[i].offsetLeft+'px';
-                  currAreaNum=i;
-                }
-              } 
+          for(let i=sectionArr.length-1; i>=0; i-=1){
+            if(currPos > sectionArr[i].offsetTop - window.innerHeight/2){
+              moveNav(i);
+              break;
             }
-            
+          } 
         }
         window.addEventListener('resize',function(){
-            posConfirm();
+          posParsing();
         });
-
         window.addEventListener('scroll', ()=>{
-          posConfirm();
-        });
-
-        list.forEach((item,idx)=>{
-          item.addEventListener('click',function(){
-            currAreaNum=idx;
-            window.scroll({
-              top:sectionArr[idx].offsetTop,
-              behavior:"smooth"
-            });
-            barPos=item.offsetLeft;
-            menuBar.style.left = list[idx].offsetLeft+'px';
-            icon_mark.style.top = idx*40 + 'px';
-            menuBar.style.left=`${barPos}px`;
-          });
+          posParsing();
         });
         list.forEach((item,idx)=>{
           item.addEventListener('mouseover',(e)=>{
@@ -104,8 +88,14 @@
           item.addEventListener('mouseleave',()=>{
             menuBar.style.left=`${barPos}px`;
           });
+          item.addEventListener('click',function(){
+            window.scroll({
+              top:sectionArr[idx].offsetTop,
+              behavior:"smooth"
+            });
+            moveNav(idx);
+          });
         });
-        posConfirm();
     </script>
 </body>
 </html>
