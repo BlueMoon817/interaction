@@ -57,7 +57,7 @@
         let sectionArr = document.querySelectorAll('section');
         let menuBar = document.querySelector('.menu_bar');
         let list = gnb.querySelectorAll('li');
-        let barPos , currPos,currBarPos;
+        let barPos , currPos,currBarPos, checkVar=false;
         menuBar.style.width=list[0].offsetWidth+'px';
         let changeNav=function(idx){
           icon_mark.style.top = (idx*40) + 'px';
@@ -73,6 +73,9 @@
             }
           } 
         }
+        let backCheckVar=function(){
+          checkVar=false;
+        }
         let moveMenuBar;
         window.addEventListener('resize',function(){
           posParsing();
@@ -80,36 +83,30 @@
         window.addEventListener('scroll', ()=>{
           posParsing();
         });
-        let add=function(){
-           menuBar.style.left=`${barPos}px`;
-        }
-        list.forEach((item,idx)=>{
-          item.addEventListener('mouseover',function(e){
-            let mouseHover = list[idx].offsetLeft;
-            menuBar.style.left=`${mouseHover}px`;
-           });
-           item.addEventListener('mousemove',function(e){
-              add();
-          });
-          item.removeEventListener('keydown', add);
-          item.addEventListener('click',function(e){
-            //메뉴와 영역이 일치하는 인덱스 구하기.
-            let currIndex=parseInt(e.target.innerHTML[5])-1;
-            barPos = list[currIndex].offsetLeft;
-            menuBar.style.left=`${barPos}px`;
-            window.scroll({
-            top: sectionArr[currIndex].offsetTop,
-            behavior:"smooth",
-          });
-         
-          });
-           
-        });
-        
-     
 
+          gnb.addEventListener('click',function(e){
+            console.log("1 :"+barPos)
+            if(e.target.tagName==='A'){
+              let currIndex=parseInt(e.target.innerHTML[5])-1;
+              barPos = list[currIndex].offsetLeft;
+              menuBar.style.left=`${barPos}px`;
+              window.scroll({
+                top: sectionArr[currIndex].offsetTop,
+                behavior:"smooth",
+              });
+            }
+            return barPos;
+          });
         
-       
+        list.forEach((item,index)=>{
+          item.addEventListener("mouseover",function(){
+            console.log("2 :"+barPos)
+            let prev=barPos;
+            barPos = list[index].offsetLeft;
+            menuBar.style.left=`${barPos}px`;
+            return barPos
+          });
+        })   
           window.addEventListener('load',function(){
             changeNav(0);
           });
