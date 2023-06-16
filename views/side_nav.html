@@ -16,9 +16,9 @@
         .gnb_nav{display:flex;width:100%;justify-content:space-between;box-sizing: border-box;padding:0 20%;}
         .gnb_nav>li{position: relative;line-height:60px;height: 60px;font-size:15px;font-weight:bold;text-transform: uppercase;}
         .gnb_nav>li>a{display: block; padding:0 10px;height:60px;transition: 0.3s;}
-        .gnb_nav>li>a::after{content:''; width: 0;height: 3px;background-color: #fff;position: absolute;left: 50%;bottom: 0;transform: translateX(-50%);}
-        .gnb_nav>li>a:hover{color: #ddd;}
-        .gnb_nav>li>a:hover::after{width: 90%;transition: 0.3s;}
+        /* .gnb_nav>li>a::after{content:''; width: 0;height: 3px;background-color: #fff;position: absolute;left: 50%;bottom: 0;transform: translateX(-50%);} */
+        .gnb_nav>li>a:hover{color: rgba(255,255,255,0.5);}
+       /* .gnb_nav>li>a:hover::after{width: 90%;transition: 0.3s;} */
         .sec01{background-color:#fc0;}
         .sec02{background-color:#fa0;}
         .sec03{background-color:#faf;}
@@ -73,22 +73,43 @@
             }
           } 
         }
+        let moveMenuBar;
         window.addEventListener('resize',function(){
           posParsing();
         });
         window.addEventListener('scroll', ()=>{
           posParsing();
         });
-        gnb.addEventListener('click',function(e){
-          //메뉴와 영역이 일치하는 인덱스 구하기.
-          let currIndex=parseInt(e.target.innerHTML[5])-1;
-          barPos = e.target.offsetLeft;
-          e.target.style.left=`${barPos}px`;
-          window.scroll({
+        let add=function(){
+           menuBar.style.left=`${barPos}px`;
+        }
+        list.forEach((item,idx)=>{
+          item.addEventListener('mouseover',function(e){
+            let mouseHover = list[idx].offsetLeft;
+            menuBar.style.left=`${mouseHover}px`;
+           });
+           item.addEventListener('mousemove',function(e){
+              add();
+          });
+          item.removeEventListener('keydown', add);
+          item.addEventListener('click',function(e){
+            //메뉴와 영역이 일치하는 인덱스 구하기.
+            let currIndex=parseInt(e.target.innerHTML[5])-1;
+            barPos = list[currIndex].offsetLeft;
+            menuBar.style.left=`${barPos}px`;
+            window.scroll({
             top: sectionArr[currIndex].offsetTop,
             behavior:"smooth",
           });
+         
           });
+           
+        });
+        
+     
+
+        
+       
           window.addEventListener('load',function(){
             changeNav(0);
           });
