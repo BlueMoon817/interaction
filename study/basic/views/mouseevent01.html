@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mouse02</title>
+    <style>
+        html{cursor: none;}
+        *{margin: 0;padding: 0;}
+        body{display: flex;justify-content: center;align-items: center;width: 100%;height: 100vh; background-color: #ddf;}
+        .alert_box{height: 100px;width: 300px;border: 1px solid #777;text-align: center;}
+        .question{line-height:50px;}
+        .btn_area{width: 100%;display: flex;background-color: transparent;border-top: 1px solid #777;}
+        .btn_area >button{cursor: none;width: 50%;height: 50px;background-color: transparent;border: 0;}
+        .btn_area >button:first-child{border-right: 1px solid #777;}
+        .btn_area >button:hover{background-color: #000;color: #fff;transition:0.5s}
+        .cursor{pointer-events: none; position:absolute;width: 50px;height: 50px;border-radius: 100%;background: rgb(126, 138, 230);opacity: .5;}
+    </style>
+</head>
+<body>
+    <div class="cursor" aria-hidden="true" style="left:0;top:0;"></div>
+    <div class="alert_box">
+        <span class="question">집에가고싶죠?</span>
+        <div class="btn_area">
+            <button type="button">네</button>
+            <button type="button">아니오</button>
+        </div>
+    </div>
+    <script>
+        const body=document.querySelector('body');
+        let cursor = document.querySelector('.cursor');
+        window.addEventListener('mousemove',function(e){
+            cursor.style.left=e.pageX+'px';
+            cursor.style.top=e.pageY+'px';
+            if(e.target.tagName==='BUTTON'){
+                cursor.style.backgroundColor='#fff'
+                cursor.style.transform='scale(1)'
+            }else{
+                cursor.style.transform='scale(1.3)'
+                cursor.style.backgroundColor='rgb(126, 138, 230)'
+            }
+
+        });
+    </script>
+</body>
+</html>

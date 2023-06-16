@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랜덤회전</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        body{overflow: hidden;width: 100%;height: 100vh;display: flex;justify-content: center;align-items: center;background-color: #dcf5b8;}
+        .wrap{height: 500px;background: #9fe8f4;display: flex;align-items: center;justify-content: center;flex-direction: column;overflow: hidden;}
+        .val{font-size: 20px;margin-top: 30px;color: coral;font-weight: bold;}
+        .btn_group{width: 100%;display: flex;justify-content: center;}
+        button{appearance: none; border: 0; background-color: #e9c66f; float: left;font-size: 20px;cursor: pointer;padding: 10px 30px;}
+        .btn_start{margin-left: 10px;}
+        .arrowWrap {
+            margin :30px 0;
+            text-align: center;
+        }
+        .arrowWrap img {
+            transition : transform 2s cubic-bezier(1.000, -0.010, 0.175, 0.970);
+            /* transition: all .2s ease-in-out; */
+            width: 30%;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="btn_group">
+            <button type="button" class="btn_reset">Reset</button>
+            <button type="button" class="btn_start">회전</button>
+        </div>
+        <div class="val">0 deg</div>
+        <div class="arrowWrap">
+            <img src="../img/up-arrow.svg" alt="arrow" class="arrow">
+          </div>
+    </div>
+    <script>
+        window.onload=function(){
+            let ResetBtn = document.querySelector('.btn_reset');
+            let startBtn = document.querySelector('.btn_start');
+            var arrow = document.querySelector(".arrow");
+            let rotateNum=0;
+            let val = document.querySelector('.val')
+            ResetBtn.addEventListener('click',function(){
+                rotateNum = 0;
+                val.innerHTML=rotateNum + 'deg';
+                arrow.style.transform = "rotate("+ rotateNum +"deg)";
+            });
+            startBtn.addEventListener("click", function(){
+                rotateNum = Math.round(Math.random()*720);
+                val.innerHTML = rotateNum + "deg";
+                arrow.style.transform = "rotate("+ rotateNum +"deg)";
+        })
+        }
+    </script>
+</body>
+</html>

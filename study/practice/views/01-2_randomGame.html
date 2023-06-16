@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가위바위보 게임</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        h1{
+            font-size: 100px;
+            font-weight: bold;
+        }
+        button{
+            font-size: 20px;
+            padding: 10px 30px;
+            cursor: pointer;
+        }
+        body{display: flex;align-items: center;justify-content: center;width: 100%;height: 100vh;background-color: #ddd;}
+        .wrap{display: flex;justify-content: center;align-items: center;flex-direction: column; width: 300px;height: 300px;border: 1px solid #000;background-color: #faa;}
+        .curr_txt{display: block;margin-top: 30px;font-size: 30px;font-weight: bold;}
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <button type="button" class="btn_start">Go!</button>
+        <div class="curr_txt">가위</div>
+    </div>
+    <script>
+        window.onload=function(){
+            let btnStart = document.querySelector('.btn_start');
+            let currTxt = document.querySelector('.curr_txt');
+            let resultArr=['가위','바위','보'];
+            btnStart.addEventListener('click',function(){
+                let num = Math.round(Math.random()*(resultArr.length-1));
+                currTxt.innerHTML=resultArr[num];
+
+            });
+        
+        
+        }
+    </script>
+</body>
+</html>

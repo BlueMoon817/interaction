@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mousemove</title>
+    <style>
+        html{cursor: none;}
+        *{margin: 0;padding: 0;}
+        body{display: flex;justify-content: center;align-items: center;width: 100%;height: 100vh; background-color: #ddf;}
+        .offset_box{height: 100px;line-height: 100px;width: 300px;border: 1px solid #000;text-align: center;}
+        .cursor{position:absolute;left: 50%;top: 50%;transform:translate(-50%,-50%);}
+        .cursor>img{width: 100px;object-fit: cover;}
+    </style>
+</head>
+<body>
+    <div class="cursor" style="position:absolute;left:0;top:0">
+    <img src="../img/butterfly.gif" alt=""></div>
+    <div class="offset_box">
+        <span class="offset_val"></span>
+    </div>
+    <script>
+        const body=document.querySelector('body');
+        let cursor = document.querySelector('.cursor');
+        let offsetVal=document.querySelector('.offset_val');
+        let x=0,y=0,targetX=0,targetY=0;
+        let speed=0.1;
+        window.addEventListener('mousemove',function(e){
+            x=e.pageX;
+            y=e.pageY;
+            offsetVal.innerHTML=`X: ${e.pageX} / Y: ${e.pageY}`
+            
+        });
+
+
+        const loop=()=>{
+            console.log(1);
+            targetX += (x -  targetX) * speed;
+            targetY += (y - targetY) * speed;
+            cursor.style.left=targetX+'px';
+            cursor.style.top=targetY+'px';
+            window.requestAnimationFrame(loop);
+        }
+        loop();
+    </script>
+</body>
+</html>
