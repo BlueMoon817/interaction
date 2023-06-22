@@ -11,7 +11,9 @@
         ul{list-style:none;}
         .wrap{position:relative;}
         .gnb{position:fixed;left:0;top:0;height:60px;width:100%;background-color:#000;color:#fff;}
-        section{display:flex;justify-content:center;align-items:center; height:100vh;width:100%;color:#000;font-size: 50px;font-weight:bold;text-transform: uppercase;}
+        section{display:flex;justify-content:center;align-items:center; height:100vh;width:100%;}
+        section.active h2{animation: fadeInUp 1s 1 forwards;}
+        h2{color:#000;font-size: 50px;font-weight:bold;text-transform: uppercase;opacity: 0;}
         .menu_bar{height:3px;background-color:#fff;transition: .3s;}
         .gnb_nav{display:flex;width:100%;justify-content:space-between;box-sizing: border-box;padding:0 20%;}
         .gnb_nav>li{position: relative;line-height:60px;height: 60px;font-size:15px;font-weight:bold;text-transform: uppercase;}
@@ -27,6 +29,10 @@
         .side_nav{position:fixed;left:50px;top:50%;transform: translateY(-50%);}
         .lnb{display:inline-block;width:3px;height:200px;background-color: #000;}
         .icon{position:absolute;left:0;width:3px;height:40px;background-color: #fff;transition: .3s;}
+        @keyframes fadeInUp{
+          0%{opacity: 0; transform: translateY(50%);}
+          100%{opacity: 1; transform: translateY(0);}
+        }
     </style>
 </head>
 <body>
@@ -45,11 +51,11 @@
             <span class="icon" style="top:0px;"></span>
             <span class="lnb"></span>
         </div>
-        <section class="sec01">section - 01</section>
-        <section class="sec02">section - 02</section>
-        <section class="sec03">section - 03</section>
-        <section class="sec04">section - 04</section>
-        <section class="sec05">section - 05</section>
+        <section class="sec01"><h2>section - 01</h2></section>
+        <section class="sec02"><h2>section - 02</h2></section>
+        <section class="sec03"><h2>section - 03</h2></section>
+        <section class="sec04"><h2>section - 04</h2></section>
+        <section class="sec05"><h2>section - 05</h2></section>
     </div>
     <script>
         const icon_mark = document.querySelector('.icon');
@@ -78,6 +84,16 @@
             }
           } 
         }
+        let ani= function(){  
+          for(let i=sectionArr.length-1; i>=0; i-=1){
+            if(!sectionArr[i].classList.contains('active')&& parseInt(icon_mark.style.top.slice(0,icon_mark.style.top.length-2))/40 ===i){
+              console.log(parseInt(menuBar.style.left.slice(0,menuBar.style.left.length-2))/40)
+              sectionArr[i].classList.add('active');
+            }else if(parseInt(icon_mark.style.top.slice(0,icon_mark.style.top.length-2))/40 !==i){
+              sectionArr[i].classList.remove('active');
+            }
+          }
+        }
         // 분기
         let once, onceMo;
         // 타이머 사용 위한 delay함수
@@ -92,7 +108,9 @@
         window.addEventListener('wheel', ()=>{
           posParsing();
         });
-        
+        window.addEventListener('scroll',function(){
+          ani();
+        });
         // mouse 없을 때 touch 이벤트
         if(device==='mo'){
           window.addEventListener('touchmove', ()=>{
