@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="page01">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,12 +17,12 @@
     header ul{display: flex;list-style: none;}
     header a{display: block;width:auto;height:100%;padding:5px 10px;background: #fff;box-sizing: border-box;line-height: 30px;border:0;}
     header button{width: auto;height:100%;padding:5px 10px;background: #fff;box-sizing: border-box;line-height: 30px;border:0;}
-    .cursor{display: none;z-index: 10000;position: absolute;background-image: url(../img/cursor_off.png);background-repeat: no-repeat; width: 98px;height: 98px;background-size: 100%;pointer-events:none;}
+    .cursor{z-index: 10000;position: absolute;background-image: url(../img/cursor_off.png);background-repeat: no-repeat; width: 98px;height: 98px;background-size: 100%;pointer-events:none;}
     
   </style>
 </head>
 <body>
-  <div class="cursor" aria-hidden="true"></div>
+  <div class="cursor js-cursor"></div>
   <header>
     <ul class="gnb">
       <li><a href="#">메뉴1</a></li>
@@ -94,43 +94,11 @@
     </div>
     </div>
   </section>
-  <section></section>
-  
+  <section style="background-color: #fc0;"></section>
+  <script src="../js/common.js"></script>
+  <script src="../js/cursor.js"></script>
   <script>
-    const cursor=document.querySelector('.cursor');
-    let vdArea=document.querySelector('.vd_area')
-    const html=document.querySelector('html');
-    const frm=document.querySelector('iframe');
-    let x=0,y=0,tagBtn,tagA,winY,scrollWinY,currPositionY;
-    html.addEventListener('mousemove',function(ev){
-      tagBtn=ev.target.closest('button');
-      tagA=ev.target.closest('a');
-      x=ev.pageX;
-      y=ev.pageY;
-      winY = window.scrollY;
-      if(ev.pageX<5 || ev.pageY-window.scrollY<5 || ev.pageY>html.offsetHeight-98){cursor.style.display='none'; return;}
-      if(frm){ // 이 문서에 vd_area가 있다면
-        //vd_area를 다시 파싱한다. (resize 대비하여 사이즈 값을 잡기 위함.)
-        vdArea=html.querySelector('.vd_area');
-        // 이 vd_area의 사이즈 보다 10이 작거나 클 때 브라우저 창에 마우스 커서가 닿기전에 보이지 않게 처리한다.
-      if((ev.pageX>=frm.offsetLeft-10 && ev.pageX<frm.offsetLeft+frm.clientWidth+10 && 
-          ev.pageY>=frm.offsetTop-10 && ev.pageY<frm.offsetTop+frm.clientHeight+98)){cursor.style.display='none'; return;}
-      }
-      window.innerWidth>1024? cursor.style.display='block' : cursor.style.display='none';
-      cursor.style.left=x+'px';
-      cursor.style.top=y+'px';
-      if(tagBtn || tagA){
-        cursor.style.backgroundImage='url(../img/cursor_on.png)';
-      }else{
-        cursor.style.backgroundImage='url(../img/cursor_off.png)';
-      }
-    });
-    window.addEventListener('scroll',function(){
-      scrollWinY=this.scrollY;
-      currPositionY=y+(scrollWinY-winY);
-      cursor.style.top=currPositionY+'px';
-    });
+    window.objectInteraction.cursor();
   </script>
-  
 </body>
 </html>
