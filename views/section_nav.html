@@ -7,49 +7,68 @@
     <title>section-basic</title>
     <style>
         *{margin:0;padding:0;}
+        body,html {width:100%;}
+        body{
+          min-height: 100vh;
+          height:auto;
+        }
         a{text-decoration:none;color:inherit;}
         ul{list-style:none;}
-        .wrap{position:relative;}
+        .wrap{position:relative;height:800px;}
         h2{color:#000;font-size: 50px;font-weight:bold;text-transform: uppercase;opacity:0;transition: 1s;}
         section{display:flex;justify-content:center;align-items:center; width:100%;}
-        .section-1{background-color:#fc0; height:100vh;}
-        .section-2{background-color:#fa0;height:500px;}
-        .section-3{background-color:#faf;height:1000px;}
-        .section-4{background-color:#0af;height:600px;}
-        .section-5{background-color:#0a0;height:900px;}
+        .section-1{background-color:#fc0;height:100vh;}
+        .section-2{background-color:#fa0;height:50%;}
+        .section-3{background-color:#faf;height:120%;}
+        .section-4{background-color:#0af;height:90%;}
+        .section-5{background-color:#0a0;height:130%;}
     </style>
 </head>
 <body>
   <div class="wrap">
-    <section class="section-1"><h2>section - 01</h2></section>
-    <section class="section-2"><h2>section - 02</h2></section>
-    <section class="section-3"><h2>section - 03</h2></section>
-    <section class="section-4"><h2>section - 04</h2></section>
-    <section class="section-5"><h2>section - 05</h2></section>
+    <section class="section-1"><h2 style="">section - 01</h2></section>
+    <section class="section-2"><h2 style="">section - 02</h2></section>
+    <section class="section-3"><h2 style="">section - 03</h2></section>
+    <section class="section-4"><h2 style="">section - 04</h2></section>
+    <section class="section-5"><h2 style="">section - 05</h2></section>
   </div>
   
   <script>
     let body = document.querySelector('body');
     let section = document.querySelectorAll('section');
     let title = document.querySelectorAll('h2');
+    let currentPos;
+    
     let sectionInfoArr = [];
     let ex=function(num){
       for(let i=0;i<title.length; i+=1){
-        title[i].style.opacity=0;
+        num!=i?title[i].style.opacity=0 :title[i].style.opacity=1;
       }
-      title[num].style.opacity=1;
+    }
+    function debounce(){
+      let timeout;
+      return function(...args){
+        const context = this;
+        clearTimeout(timeout);
+        timeout=setTimeout(()=> callback.apply(context,args), wait);
+      }
     }
     let checkSize = function(){
       for(let i=0;i<section.length; i+=1){
         sectionInfoArr.push({
           sectionCenter: section[i-1]? section[i].offsetTop - section[i].offsetHeight * 0.4 : section[i].offsetTop,
-          sectionEndPos: section[i+1]&& i+1<section.length? section[i+1].offsetTop - section[i].offsetHeight * 0.4: body.clientHeight
+          sectionEndPos: section[i+1]&& i<section.length? section[i+1].offsetTop - section[i].offsetHeight * 0.4 : body.scrollHeight - section[i].offsetHeight * 0.4
         });
       }
+      currentPos=window.scrollY;
+      for(let i=0;i<section.length;i+=1){
+        if(currentPos>sectionInfoArr[i].sectionCenter && currentPos<sectionInfoArr[i].sectionEndPos){
+          ex(i);
+        }
+      }      
       console.log(sectionInfoArr)
     }
     checkSize();
-    let currentPos;
     window.addEventListener('scroll', function(){
       currentPos=window.scrollY;
       for(let i=0;i<section.length;i+=1){
@@ -58,6 +77,9 @@
         }
       }
     });
+    window.addEventListener('resize',debounce(function(){
+      checkSize();
+    },500))
   </script>
 </body>
 </html>
