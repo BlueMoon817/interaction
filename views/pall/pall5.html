@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+body{ background-color: #000;;}
+header{position:fixed;top:0;left:0;width:100%;z-index:200;
+  height:80px;background-color:#000;}
+footer{height:200px;background-color:#000;}
+        *{margin:0;padding:0;}
+section {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+}
+.sec01{height:calc(100vh - 80px);margin-top:80px;}
+.sec02{height:1688px;}
+.sec03{height:1580px;}
+.sec04{height:1140px;top:-140px;}
+.sec05{height:1140px;top:-140px;}
+.line1,.line4{position:absolute;top:-100px;left:0;width:100%;height:100px;}
+.bg1{background:url(img/11.jpg);  background-size: cover;  background-position:center ;
+  background-repeat: no-repeat;}
+.bg2{background:url(img/22.jpg);background-size: cover;
+  background-position: center ;
+  background-repeat: no-repeat;}
+.bg3{background:url(img/33.jpg);  background-size: cover;
+  background-position: center ;
+  background-repeat: no-repeat;}
+.bg4{background:url(img/44.jpg); background-size: cover;
+  background-position: center ;
+  background-repeat: no-repeat;}
+.bg5{background:url(img/1.jpg);  background-size: cover;
+  background-position: center ;
+  background-repeat: no-repeat;}
+.bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+}
+
+
+
+h2 {
+  color: white;
+  text-shadow: 1px 1px 3px black;
+  z-index: 1;
+  font-size: 3em;
+  font-weight: 400;
+}
+
+        .side_nav{position:fixed;left:50px;top:50%;transform: translateY(-50%);z-index:30;}
+        .lnb{display:inline-block;width:3px;height:200px;background-color: #000;}
+        .icon{position:absolute;left:0;width:3px;height:40px;background-color: #fff;transition: .3s;}        
+    </style>
+</head>
+<body>
+  <header>
+    헤더
+  </header>
+        <div class="side_nav">
+            <span class="icon" style="top:0px;"></span>
+            <span class="lnb"></span>
+        </div>
+  
+  
+  
+<section class="sec01">
+  <div class="bg bg1">
+  </div>
+  <h2>Simple parallax sections</h2>
+</section >
+<section class="sec02">
+  <div class="bg bg2"></div>
+  <img src="../img/line1.png" alt="" class="line1">
+  <h2>Hey look, a title</h2>
+</section>
+<section class="sec03">
+  <div class="bg bg3">
+  </div>
+  <h2>They just keep coming</h2>
+</section>
+<section class="sec04">
+  <div class="bg bg4">
+  </div>
+  <img src="../img/line4.png" alt="" class="line4">
+  <h2>So smooth though</h2>
+</section>
+<section class="sec05">
+  <div class="bg bg5">
+  </div>
+  <h2>Nice, right?</h2>
+</section>
+<footer>
+  
+  푸터
+</footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+let getRatio = el => window.innerHeight / (window.innerHeight + el.offsetHeight);
+
+gsap.utils.toArray("section").forEach((section, i) => {
+  section.bg = section.querySelector(".bg"); 
+
+  // the first image (i === 0) should be handled differently because it should start at the very top.
+  // use function-based values in order to keep things responsive
+  gsap.fromTo(section.bg, {
+    
+    backgroundPosition: () => i ? `50% ${-window.innerHeight * getRatio(section)}px` : "50% 0px"
+  }, {
+    backgroundPosition: () => `50% ${window.innerHeight * (1 - getRatio(section))}px`,
+    ease: "none",
+    scrollTrigger: {
+      trigger: section,
+      start: () => i ? "top bottom" : "top top", 
+      end: "bottom top",
+      scrub: true,
+      invalidateOnRefresh: true // to make it responsive
+    }
+  });
+
+});
+
+// 스크롤이 올라갈 경우와 내려갈 경우의 바의 변경시점이 달라짐..
+        const icon_mark=document.querySelector('.icon');
+        const body=document.querySelector('body');
+        let bar = document.querySelector('.lnb');
+        let sec01=document.querySelector('.sec01').offsetTop - window.innerHeight/2;
+        let sec02=document.querySelector('.sec02').offsetTop - window.innerHeight/2;
+        let sec03=document.querySelector('.sec03').offsetTop - window.innerHeight/2;
+        let sec04=document.querySelector('.sec04').offsetTop - window.innerHeight/2;
+        let sec05=document.querySelector('.sec05').offsetTop - window.innerHeight/2;
+        let curr;
+        
+        
+        window.addEventListener('resize',function(){
+          sec01=document.querySelector('.sec01').offsetTop - window.innerHeight/2;
+          sec02=document.querySelector('.sec02').offsetTop - window.innerHeight/2;
+          sec03=document.querySelector('.sec03').offsetTop - window.innerHeight/2;
+          sec04=document.querySelector('.sec04').offsetTop - window.innerHeight/2;
+          sec05=document.querySelector('.sec05').offsetTop - window.innerHeight/2;
+        });
+        
+        
+        window.addEventListener('scroll', ()=>{
+            curr=window.scrollY;
+            console.log(curr)
+            if(curr>=sec05){
+                icon_mark.style.top='160px';
+            }else if(curr>=sec04){
+                icon_mark.style.top='120px';
+            }else if(curr>=sec03){
+                icon_mark.style.top='80px';
+            }else if(curr>=sec02){
+                icon_mark.style.top='40px';
+            }else if(curr>=sec01){
+                icon_mark.style.top='0px';
+            }
+        });
+        
+</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+      *{margin:0;padding:0;box-sizing: border-box;}
+      :root{--index:calc(1vw + 1vh)}
+      
+      /* font-size : calc(var(--index) * 2.5) 이런식으로 비율을 줄 수 있음. */
+      html{scroll-behavior: smooth;}
+body{ background-color: #000;}
+section {
+  position:relative;left:0;top:0;width:100%;height:100vh;min-height:100vh;display:flex;justify-content:center;align-items:center;overflow: hidden;
+}
+h2{font-size:50px;position:absolute;left:50%;top:50%;transform: translate(-50%,-50%);color:#000;}
+.bg01{background:url(img/1.jpg);}
+.bg02{background:url(img/2.jpg);}
+.bg03{background:url(img/3.jpg);}
+.bg04{background:url(img/4.jpg);}
+.bg05{background:url(img/5.jpg);}
+.bg{will-change: content;width:100%;height:100%;position:absolute;background-size:cover;background-position:50% 0;background-repeat:no-repeat;}
+.side_nav{position:fixed;left:50px;top:50%;transform: translateY(-50%);z-index:30;}
+.lnb{display:inline-block;width:3px;height:200px;background-color: #000;}
+.icon{position:absolute;left:0;width:3px;height:40px;background-color: #fff;transition: .3s;}      
+.layer01{transform: translate3d(0,calc(var(--scrollTop)/1.5),0);}
+.layer02{height:100vh;transform: translate3d(0,calc(var(--scrollTop)/100vh),0);}
+.layer03{transform: translate3d(0,calc(var(--scrollTop)/6000 * -1),0);}
+.sec01{height:100vh;}
+.sec02{height:150vh;}
+.sec03{height:180vh;}
+.sec04{height:200vh;}
+.sec05{height:1190px;}
+    </style>
+</head>
+<body>
+  <div class="side_nav">
+    <span class="icon" style="top:0px;"></span>
+    <span class="lnb"></span>
+  </div>
+  <section class="sec01">
+    <div class="bg bg01"></div>
+    <h2>section01</h2>
+  </section>
+  <section class="sec02">
+    <div class="bg bg02"></div>
+    <h2>section02</h2>
+  </section>
+  <section class="sec03">
+    <div class="bg bg03"></div>
+    <h2>section01</h2>
+  </section>
+  <section class="sec04">
+    <div class="bg bg04"></div>
+    <h2>section01</h2>
+  </section>
+  <section class="sec05">
+    <div class="bg bg05"></div>
+    <h2>section01</h2>
+  </section>
+
+  <script>
+    let layerArr =document.querySelectorAll('section');
+    let bgArr = document.querySelectorAll('.bg')
+    let changePos,pos3;
+    let ratio =(area)=>{ changePos= window.scrollY / (window.scrollY + area.offsetHeight); return changePos};
+    let scrollVal,currPos;
+
+// 스크롤이 올라갈 경우와 내려갈 경우의 바의 변경시점이 달라짐..
+        const icon_mark=document.querySelector('.icon');
+        const body=document.querySelector('body');
+        let bar = document.querySelector('.lnb');
+        let sec01=document.querySelector('.sec01').offsetTop - window.innerHeight/2;
+        let sec02=document.querySelector('.sec02').offsetTop - window.innerHeight/2;
+        let sec03=document.querySelector('.sec03').offsetTop - window.innerHeight/2;
+        let sec04=document.querySelector('.sec04').offsetTop - window.innerHeight/2;
+        let sec05=document.querySelector('.sec05').offsetTop - window.innerHeight/2;
+        let curr;
+        window.addEventListener('resize',function(){
+          sec01=document.querySelector('.sec01').offsetTop - window.innerHeight/2;
+          sec02=document.querySelector('.sec02').offsetTop - window.innerHeight/2;
+          sec03=document.querySelector('.sec03').offsetTop - window.innerHeight/2;
+          sec04=document.querySelector('.sec04').offsetTop - window.innerHeight/2;
+          sec05=document.querySelector('.sec05').offsetTop - window.innerHeight/2;
+        });
+        
+        window.addEventListener('scroll', ()=>{
+          curr=window.scrollY;
+          if(0<=curr){
+            ratio(layerArr[0])
+            bgArr[0].style.backgroundPosition=`50% ${curr * changePos}px`
+            ratio(layerArr[1]);
+            scrollVal = curr * (1-changePos)
+            bgArr[1].style.backgroundPosition=`50% ${(curr * changePos)-scrollVal}px`
+            if(layerArr[1].offsetTop<=curr){
+              bgArr[2].style.backgroundPosition=`50% ${(curr * changePos)-(scrollVal*2)}px`
+              bgArr[3].style.backgroundPosition=`50% ${(curr * changePos)-(scrollVal*3)}px`
+            }
+          }           
+          // console.log(curr)
+          if(curr>=sec05){
+              icon_mark.style.top='160px';
+          }else if(curr>=sec04){
+              icon_mark.style.top='120px';
+          }else if(curr>=sec03){
+              icon_mark.style.top='80px';
+          }else if(curr>=sec02){
+              icon_mark.style.top='40px';
+          }else if(curr>=sec01){
+              icon_mark.style.top='0px';
+          }
+        });    
+  </script>
+
+
+
+        
+</script>
+</body>
+</html>

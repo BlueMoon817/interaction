@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+        /* iOS only */ 
+body {
+  min-height: 100vh;
+  /* mobile viewport bug fix */
+  min-height: -webkit-fill-available;
+}
+
+html {
+  height: -webkit-fill-available;
+}
+
+        *{margin:0;padding:0;}
+         section{position:relative;width:100%;height:00vh;overflow:hidden;}
+
+        .bg-wrap{ position: sticky;top: 0;left: 0;width: 100%;height: 100%;clip: rect(0, 1920px, 1080px, 0);-webkit-clip: rect(0, 1920px, 1080px, 0)}
+        .bg{position: fixed;top: 0;left: 0;width:100%;height:100%;}
+        .sec01 .bg{width: 100%;height:100%;
+            /* background-image:url("./img/1.jpg"); background-repeat: no-repeat;background-size:cover;background-position:center center; */
+        }
+        
+        .sec02 .bg{width: 100%;height:100%;
+            /* background-image:url("./img/2.jpg"); background-repeat: no-repeat;background-size:cover;background-position:center center; */
+    }
+    
+        .sec03 .bg{width: 100%;height:100%;
+            /* background-image:url("./img/3.jpg"); background-repeat: no-repeat;background-size:cover;background-position:center center; */
+        }
+        
+        .sec04 .bg{width: 100%;height:100%;
+            /* background-image:url("./img/4.jpg"); background-repeat: no-repeat;background-size:cover;background-position:center center; */
+        }
+        .sec05 .bg{width: 100%;height:100%;
+            /* background-image:url("./img/5.jpg"); background-repeat: no-repeat;background-size:cover;background-position:center center; */
+        }
+       
+        
+    </style>
+</head>
+<body>
+    <!-- <div class="wrap"> -->
+        
+    <section class="sec01">
+        <div class="bg-wrap">
+            <div class="bg">
+                <img src="img/1.jpg" alt="">
+            </div>
+        </div>
+    </section>
+    <section class="sec02">  
+        <div class="bg-wrap">
+            <div class="bg">
+                 <img src="img/2.jpg" alt="">
+            </div>
+        </div>
+    </section>
+    <section class="sec03">  
+    <div class="bg-wrap">
+        <div class="bg">
+             <img src="img/3.jpg" alt="">
+        </div>
+  
+    </div>
+</section>
+    <section class="sec04">  
+        <div class="bg-wrap">
+            
+    <div class="bg">
+         <img src="img/4.jpg" alt="">
+    </div>
+  </div>
+</section>
+    <section class="sec05">
+        <div class="bg-wrap">
+    <div class="bg">
+         <img src="img/5.jpg" alt="">
+    </div>
+  </div>
+</section>
+    <!-- </div> -->
+</body>
+</html>
