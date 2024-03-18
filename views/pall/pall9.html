@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preload" as="images" href="../../img/pall3.jpg">
+    <style>
+      *{margin:0;padding:0;box-sizing: border-box;}
+      
+      /* font-size : calc(var(--index) * 2.5) 이런식으로 비율을 줄 수 있음. */
+      html{scroll-behavior: smooth;}
+body{ background-color: #000;}
+section {
+  position:relative;left:0;top:0;width:100%;height:100vh;min-height:100vh;display:flex; justify-content:center;align-items:center;overflow: hidden;
+}
+h2{font-size:50px;position:absolute;left:50%;top:50%;transform: translate(-50%,-50%);color:#000;}
+.bg01{background:url(../../img/pall1.jpg);}
+.bg02{background:url(../../img/pall2.jpg);}
+.bg03{background:url(../../img/pall3.jpg);}
+.bg04{background:url(../../img/pall4.jpg);}
+.bg05{background:url(../../img/pall5.jpg);}
+.bg{will-change: content;width:100%;height:100%;position:absolute;left: 0;top: 0;background-size:cover;background-repeat:no-repeat;}
+.sec01{height:100vh;}
+.sec02{height:100vh;}
+.sec03{height:100vh;}
+.sec04{height:1490px;}
+.sec05{height:100vh;}
+    </style>
+</head>
+<body>
+  <section class="sec01">
+    <div class="bg bg01"></div>
+    <h2>section01</h2>
+  </section>
+  <section class="sec02">
+    <div class="bg bg02"></div>
+    <h2>section02</h2>
+  </section>
+  <section class="sec03">
+    <div class="bg bg03"></div>
+    <h2>section03</h2>
+  </section>
+  <section class="sec04">
+    <div class="bg bg04"></div>
+    <h2>section04</h2>
+  </section>
+  <section class="sec05">
+    <div class="bg bg05"></div>
+    <h2>section05</h2>
+  </section>
+
+  <script>
+    let body = document.querySelector('body');
+    let section = document.querySelectorAll('section');
+    let title = document.querySelectorAll('h2');
+    let bgArr = document.querySelectorAll('.bg')
+    let scrollPos = 0;
+    let scrollVal1;
+    let sectionInfoArr = [];
+    let ex=function(num){
+      for(let i=0;i<title.length; i+=1){
+        num!=i?title[i].style.opacity=0 :title[i].style.opacity=1;
+      }
+    }
+    function debounce(){
+      let timeout;
+      return function(...args){
+        const context = this;
+        clearTimeout(timeout);
+        timeout=setTimeout(()=> callback.apply(context,args), wait);
+      }
+    }
+    let checkSize = function(){
+      let currentPos;
+      for(let i=0;i<section.length; i+=1){
+        sectionInfoArr.push({
+          sectionCenter: section[i-1]? section[i].offsetTop - section[i].offsetHeight * 0.4 : section[i].offsetTop,
+          sectionEndPos: section[i+1]&& i<section.length? section[i+1].offsetTop - section[i].offsetHeight * 0.4 : body.scrollHeight - section[i].offsetHeight * 0.4,
+          sectionHeight: section[i].offsetHeight
+        });
+      }
+      currentPos=window.scrollY;
+      for(let i=0;i<section.length;i+=1){
+        if(currentPos>sectionInfoArr[i].sectionCenter && currentPos<sectionInfoArr[i].sectionEndPos){
+          ex(i);
+        }
+      }
+      console.log(sectionInfoArr)
+    }
+    checkSize();
+    let prevScrollPos=0;
+    window.addEventListener('scroll', function(){
+      scrollPos=window.scrollY;
+        bgArr[0].style.transform = `translateY(${scrollPos * (scrollPos / (scrollPos + sectionInfoArr[0].sectionHeight))}px)`
+        scrollVal1 = scrollPos * (1 - (scrollPos / (scrollPos + sectionInfoArr[0].sectionHeight)));
+        scrollVal2 = scrollPos * (1 - (scrollPos / (scrollPos + sectionInfoArr[1].sectionHeight)));
+        scrollVal3 = scrollPos * (1 - (scrollPos / (scrollPos + sectionInfoArr[2].sectionHeight)));
+        bgArr[1].style.transform = `translateY(${(scrollPos * (scrollPos / (scrollPos + sectionInfoArr[1].sectionHeight))) - scrollVal1}px)`
+        bgArr[2].style.transform = `translateY(${(scrollPos * (scrollPos / (scrollPos + sectionInfoArr[2].sectionHeight))) - (scrollVal1 + scrollVal2)}px)`
+        bgArr[3].style.transform = `translateY(${(scrollPos * (scrollPos / (scrollPos + sectionInfoArr[3].sectionHeight))) - (scrollVal1 + scrollVal2 + scrollVal3)}px)`
+      for(let i=0;i<section.length;i+=1){
+        if(scrollPos>sectionInfoArr[i].sectionCenter && scrollPos<sectionInfoArr[i].sectionEndPos){
+          ex(i);
+        }
+      }
+    });
+    window.addEventListener('resize',debounce(function(){
+      checkSize();
+    },500))    
+  </script>
+
+
+
+        
+</script>
+</body>
+</html>

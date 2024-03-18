@@ -17,11 +17,11 @@ section {
   position:relative;left:0;top:0;width:100%;height:100vh;min-height:100vh;display:flex;justify-content:center;align-items:center;overflow: hidden;
 }
 h2{font-size:50px;position:absolute;left:50%;top:50%;transform: translate(-50%,-50%);color:#000;}
-.bg01{background:url(img/1.jpg);}
-.bg02{background:url(img/2.jpg);}
-.bg03{background:url(img/3.jpg);}
-.bg04{background:url(img/4.jpg);}
-.bg05{background:url(img/5.jpg);}
+.bg01{background:url(../../img/pall1.jpg);}
+.bg02{background:url(../../img/pall2.jpg);}
+.bg03{background:url(../../img/pall3.jpg);}
+.bg04{background:url(../../img/pall4.jpg);}
+.bg05{background:url(../../img/pall5.jpg);}
 .bg{will-change: content;width:100%;height:100%;position:absolute;background-size:cover;background-position:50% 0;background-repeat:no-repeat;}
 .side_nav{position:fixed;left:50px;top:50%;transform: translateY(-50%);z-index:30;}
 .lnb{display:inline-block;width:3px;height:200px;background-color: #000;}
@@ -51,15 +51,15 @@ h2{font-size:50px;position:absolute;left:50%;top:50%;transform: translate(-50%,-
   </section>
   <section class="sec03">
     <div class="bg bg03"></div>
-    <h2>section01</h2>
+    <h2>section03</h2>
   </section>
   <section class="sec04">
     <div class="bg bg04"></div>
-    <h2>section01</h2>
+    <h2>section04</h2>
   </section>
   <section class="sec05">
     <div class="bg bg05"></div>
-    <h2>section01</h2>
+    <h2>section05</h2>
   </section>
 
   <script>
@@ -99,7 +99,7 @@ h2{font-size:50px;position:absolute;left:50%;top:50%;transform: translate(-50%,-
               bgArr[2].style.backgroundPosition=`50% ${(curr * changePos)-(scrollVal*2)}px`
               bgArr[3].style.backgroundPosition=`50% ${(curr * changePos)-(scrollVal*3)}px`
             }
-          }           
+          }
           // console.log(curr)
           if(curr>=sec05){
               icon_mark.style.top='160px';

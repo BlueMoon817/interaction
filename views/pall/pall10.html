@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+      *{margin:0;padding:0;box-sizing: border-box;}
+      
+      /* font-size : calc(var(--index) * 2.5) 이런식으로 비율을 줄 수 있음. */
+      html{scroll-behavior: smooth;}
+body{ background-color: #000;}
+section {
+  position:relative;left:0;top:0;width:100%;height:100vh;min-height:100vh;display:flex; justify-content:center;align-items:center;overflow: hidden;
+}
+h2{font-size:50px;position:absolute;left:50%;top:50%;transform: translate(-50%,-50%);color:#000;}
+.bg01{background:url(../../img/pall1.jpg);}
+.bg02{background:url(../../img/pall2.jpg);}
+.bg03{background:url(../../img/pall3.jpg);}
+.bg04{background:url(../../img/pall4.jpg);}
+.bg05{background:url(../../img/pall5.jpg);}
+.bg{will-change: content;width:100%;height:100%;position:absolute;background-size:cover;background-repeat:no-repeat;background-position: 0 0;}
+.sec01{height:100vh;}
+.sec02{height:100vh;}
+.sec03{height:100vh;}
+.sec04{height:1490px;}
+.sec05{height:100vh;}
+    </style>
+</head>
+<body>
+  <section class="sec01">
+    <div class="bg bg01"></div>
+    <h2>section01</h2>
+  </section>
+  <section class="sec02">
+    <div class="bg bg02"></div>
+    <h2>section02</h2>
+  </section>
+  <section class="sec03">
+    <div class="bg bg03"></div>
+    <h2>section03</h2>
+  </section>
+  <section class="sec04">
+    <div class="bg bg04"></div>
+    <h2>section04</h2>
+  </section>
+  <section class="sec05">
+    <div class="bg bg05"></div>
+    <h2>section05</h2>
+  </section>
+
+  <script>
+    let body = document.querySelector('body');
+    let section = document.querySelectorAll('section');
+    let title = document.querySelectorAll('h2');
+    let currentPos;
+    let bgArr = document.querySelectorAll('.bg')
+    let changePos, pos3;
+    let posArr = [];
+    
+    let scrollVal1;
+    let sectionInfoArr = [];
+    let ex=function(num){
+      for(let i=0;i<title.length; i+=1){
+        num!=i?title[i].style.opacity=0 :title[i].style.opacity=1;
+      }
+    }
+    function debounce(){
+      let timeout;
+      return function(...args){
+        const context = this;
+        clearTimeout(timeout);
+        timeout=setTimeout(()=> callback.apply(context,args), wait);
+      }
+    }
+    let checkSize = function(){
+      for(let i=0;i<section.length; i+=1){
+        sectionInfoArr.push({
+          sectionCenter: section[i-1]? section[i].offsetTop - section[i].offsetHeight * 0.4 : section[i].offsetTop,
+          sectionEndPos: section[i+1]&& i<section.length? section[i+1].offsetTop - section[i].offsetHeight * 0.4 : body.scrollHeight - section[i].offsetHeight * 0.4,
+          sectionHeight: section[i].offsetHeight
+        });
+      }
+      currentPos=window.scrollY;
+      for(let i=0;i<section.length;i+=1){
+        if(currentPos>sectionInfoArr[i].sectionCenter && currentPos<sectionInfoArr[i].sectionEndPos){
+          ex(i);
+        }
+      }
+      console.log(sectionInfoArr)
+    }
+    checkSize();
+    window.addEventListener('scroll', function(){
+      currentPos=window.scrollY;
+      for(let i=0;i<section.length;i+=1){
+        if(currentPos>sectionInfoArr[i].sectionCenter && currentPos<sectionInfoArr[i].sectionEndPos){
+          ex(i);
+        }
+      }
+      bgArr[0].style.backgroundPosition = `0 ${currentPos * (currentPos / (currentPos + sectionInfoArr[1].sectionHeight))}px`
+      scrollVal1 = currentPos * (1 - (currentPos / (currentPos + sectionInfoArr[0].sectionHeight)));
+      if (section[0].offsetTop <= currentPos) {
+        bgArr[1].style.backgroundPosition = `0 ${(currentPos * (currentPos / (currentPos + sectionInfoArr[2].sectionHeight))) - scrollVal1}px`
+      }
+      if (section[1].offsetTop <= currentPos) {
+        bgArr[2].style.backgroundPosition = `0 ${(currentPos * (currentPos / (currentPos + sectionInfoArr[3].sectionHeight))) - (scrollVal1 * 2)}px`
+      }
+      if (section[2].offsetTop <= currentPos) {
+        bgArr[3].style.backgroundPosition = `0 ${(currentPos * (currentPos / (currentPos + sectionInfoArr[4].sectionHeight))) - (scrollVal1 * 3)}px`
+      }
+        
+        // for(let i=0;i<section.length; i+=1){
+        //   posArr.push(ratio(section[i]));
+        // }
+        // for(let i=0;i<section.length; i+=1){
+        //   scrollVal = currentPos * (1 - posArr[i])
+        //   if(i===0){
+        //     bgArr[i].style.backgroundPosition = `0 ${currentPos * posArr[i]}px`;
+        //   }
+        //   else if(i==1){
+        //     bgArr[i].style.backgroundPosition = `0 ${(currentPos * posArr[i]) - (scrollVal)}px`;
+        //   }else if (i>1){
+        //     bgArr[i].style.backgroundPosition = `0 ${(currentPos * posArr[i]) - (scrollVal * i)}px`;
+        //   }
+        // }
+    });
+    window.addEventListener('resize',debounce(function(){
+      checkSize();
+    },500))    
+
+
+  </script>
+
+
+
+        
+</script>
+</body>
+</html>
